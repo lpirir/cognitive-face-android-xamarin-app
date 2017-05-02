@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="XamarinFaceAPI.Droid" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="XamarinFaceAPI.Droid.Activities.UI.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+		  <activity
+            android:name="XamarinFaceAPI.Droid.Activities.UI.DetectionActivity"
+            android:label="@string/detection"
+            android:launchMode="singleTop"
+            android:parentActivityName="XamarinFaceAPI.Droid.Activities.UI.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="XamarinFaceAPI.Droid.Activities.UI.MainActivity" />
+        </activity>
+		 <activity
+            android:name="XamarinFaceAPI.Droid.Activities.UI.FaceVerificationActivity"
+            android:label="@string/face_verification"
+            android:launchMode="singleTop"
+            android:parentActivityName="XamarinFaceAPI.Droid.Activities.UI.VerificationMenuActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="XamarinFaceAPI.Droid.Activities.UI.MainActivity" />
+        </activity>
+		<activity
+            android:name="XamarinFaceAPI.Droid.Activities.UI.PersonVerificationActivity"
+            android:label="@string/person_verification"
+            android:launchMode="singleTop"
+            android:parentActivityName="XamarinFaceAPI.Droid.Activities.UI.VerificationMenuActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="XamarinFaceAPI.Droid.Activities.UI.MainActivity" />
+        </activity>
+        <activity
+            android:name="XamarinFaceAPI.Droid.Activities.UI.IdentificationActivity"
+            android:label="@string/identification"
+            android:launchMode="singleTop"
+            android:parentActivityName="XamarinFaceAPI.Droid.Activities.UI.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="XamarinFaceAPI.Droid.Activities.UI.MainActivity" />
+        </activity>
+        <activity
+            android:name="XamarinFaceAPI.Droid.Activities.UI.GroupingActivity"
+            android:label="@string/grouping"
+            android:launchMode="singleTop"
+            android:parentActivityName="XamarinFaceAPI.Droid.Activities.UI.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="XamarinFaceAPI.Droid.Activities.UI.MainActivity" />
+        </activity>
+        <activity
+            android:name="XamarinFaceAPI.Droid.Activities.UI.FindSimilarFaceActivity"
+            android:label="@string/find_similar_faces"
+            android:launchMode="singleTop"
+            android:parentActivityName="XamarinFaceAPI.Droid.Activities.UI.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="XamarinFaceAPI.Droid.Activities.UI.MainActivity" />
+        </activity>
+        <activity
+            android:name="XamarinFaceAPI.Droid.Activities.UI.SelectImageActivity"
+            android:label="@string/select_an_image"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="XamarinFaceAPI.Droid.Activities.UI.VerificationMenuActivity"
+            android:label="@string/verification"
+            android:parentActivityName="XamarinFaceAPI.Droid.Activities.UI.MainActivity"
+            android:screenOrientation="portrait" />
+    </application>
+</manifest>
