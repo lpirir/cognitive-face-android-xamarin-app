@@ -940,6 +940,9 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0a002c
 			public const int expanded_menu = 2131361836;
 			
+			// aapt resource value: 0x7f0a006d
+			public const int face_thumbnail = 2131361901;
+			
 			// aapt resource value: 0x7f0a0049
 			public const int facial_similar_faces = 2131361865;
 			
@@ -1135,6 +1138,9 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0a0044
 			public const int text_all_faces = 2131361860;
 			
+			// aapt resource value: 0x7f0a006e
+			public const int text_detected_face = 2131361902;
+			
 			// aapt resource value: 0x7f0a004e
 			public const int text_person_group_selected = 2131361870;
 			
@@ -1291,7 +1297,10 @@ namespace XamarinFaceAPI.Droid
 			public const int activity_verification_menu = 2130968608;
 			
 			// aapt resource value: 0x7f040021
-			public const int support_simple_spinner_dropdown_item = 2130968609;
+			public const int item_face_with_description = 2130968609;
+			
+			// aapt resource value: 0x7f040022
+			public const int support_simple_spinner_dropdown_item = 2130968610;
 			
 			static Layout()
 			{
@@ -2321,7 +2330,7 @@ namespace XamarinFaceAPI.Droid
 					16843055,
 					16843056,
 					16843057,
-					18219093};
+					18219096};
 			
 			// aapt resource value: 4
 			public const int MenuView_android_headerBackground = 4;

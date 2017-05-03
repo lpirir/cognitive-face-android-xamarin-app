@@ -1,5 +1,10 @@
 ﻿<Properties StartupConfiguration="{60693B0B-B870-49F1-B812-05D5A01B5580}|Default">
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="XamarinFaceAPI.Droid/Helpers/ImageHelper.cs">
+    <Files>
+      <File FileName="XamarinFaceAPI.Droid/Activities/UI/DetectionActivity.cs" Line="109" Column="10" />
+      <File FileName="XamarinFaceAPI.Droid/Helpers/ImageHelper.cs" Line="208" Column="93" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.XamarinFaceAPI.Droid AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.Pixel_API_25" AndroidDesignerPreferredTheme="AppTheme" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

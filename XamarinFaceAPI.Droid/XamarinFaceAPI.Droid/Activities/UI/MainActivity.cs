@@ -9,7 +9,7 @@ namespace XamarinFaceAPI.Droid.Activities.UI
 	[Activity(Name = "XamarinFaceAPI.Droid.Activities.UI.MainActivity")]
 	public class MainActivity : Activity
 	{
-		Button detection, verification, grouping, findSimilarFace, identification = null;
+		private Button detection, verification, grouping, findSimilarFace, identification = null;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
