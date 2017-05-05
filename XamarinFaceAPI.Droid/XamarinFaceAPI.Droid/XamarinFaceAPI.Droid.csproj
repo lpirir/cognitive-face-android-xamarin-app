@@ -96,6 +96,7 @@
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Activities\Log\DetectionLogActivity.cs" />
     <Compile Include="Helpers\SampleApp.cs" />
+    <Compile Include="Activities\Log\VerificationLogActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -127,6 +128,8 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\layout\item_log.axml" />
     <AndroidResource Include="Resources\layout\item_face.axml" />
+    <AndroidResource Include="Resources\layout\activity_detection_log.axml" />
+    <AndroidResource Include="Resources\layout\activity_verification_log.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\mipmap-hdpi\" />

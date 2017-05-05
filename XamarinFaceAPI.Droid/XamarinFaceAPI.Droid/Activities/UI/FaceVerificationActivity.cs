@@ -19,6 +19,7 @@ using Java.Util;
 using Xamarin.Cognitive.Face.Android;
 using Xamarin.Cognitive.Face.Android.Contract;
 using XamarinFaceAPI.Droid.Helpers;
+using XamarinFaceAPI.Droid.Log;
 
 namespace XamarinFaceAPI.Droid
 {
@@ -79,6 +80,7 @@ namespace XamarinFaceAPI.Droid
 			select_image_0.Click -= Select_Image_0_Click;
 			select_image_1.Click -= Select_Image_1_Click;
 			view_log.Click -= View_Log_Click;
+			verify.Click -= Verify_Click;
 		}
 
 		protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -158,8 +160,8 @@ namespace XamarinFaceAPI.Droid
 
 		void View_Log_Click(object sender, EventArgs e)
 		{
-			//Intent intent = new Intent(this, typeof(VerificationLogActivity));
-			//StartActivity(Intent);
+			Intent intent = new Intent(this, typeof(VerificationLogActivity));
+			StartActivity(Intent);
 		}
 
 		private void SelectImage(int index)

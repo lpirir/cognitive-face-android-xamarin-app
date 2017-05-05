@@ -1,11 +1,5 @@
 ﻿<Properties StartupConfiguration="{60693B0B-B870-49F1-B812-05D5A01B5580}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="XamarinFaceAPI.Droid/Activities/UI/FaceVerificationActivity.cs">
-    <Files>
-      <File FileName="XamarinFaceAPI.Droid/Activities/UI/VerificationMenuActivity.cs" Line="44" Column="43" />
-      <File FileName="XamarinFaceAPI.Droid/Activities/UI/DetectionActivity.cs" Line="44" Column="4" />
-      <File FileName="XamarinFaceAPI.Droid/Activities/UI/FaceVerificationActivity.cs" Line="42" Column="58" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.ItemProperties.XamarinFaceAPI.Droid AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.FA6AJBR02565" AndroidDesignerPreferredTheme="AppTheme" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" ActiveRuntime="Mono 5.0.0.94" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

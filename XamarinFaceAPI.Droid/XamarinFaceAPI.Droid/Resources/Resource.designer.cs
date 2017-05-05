@@ -1750,20 +1750,20 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0b0013
 			public const int add = 2131427347;
 			
-			// aapt resource value: 0x7f0b0078
-			public const int add_face = 2131427448;
+			// aapt resource value: 0x7f0b0079
+			public const int add_face = 2131427449;
 			
-			// aapt resource value: 0x7f0b005f
-			public const int add_faces = 2131427423;
+			// aapt resource value: 0x7f0b0060
+			public const int add_faces = 2131427424;
 			
-			// aapt resource value: 0x7f0b005d
-			public const int add_faces_control = 2131427421;
+			// aapt resource value: 0x7f0b005e
+			public const int add_faces_control = 2131427422;
 			
 			// aapt resource value: 0x7f0b003b
 			public const int alertTitle = 2131427387;
 			
-			// aapt resource value: 0x7f0b0060
-			public const int all_faces = 2131427424;
+			// aapt resource value: 0x7f0b0061
+			public const int all_faces = 2131427425;
 			
 			// aapt resource value: 0x7f0b001d
 			public const int always = 2131427357;
@@ -1780,11 +1780,11 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0b005a
 			public const int button_bar = 2131427418;
 			
-			// aapt resource value: 0x7f0b007b
-			public const int button_select_a_photo_in_album = 2131427451;
+			// aapt resource value: 0x7f0b007c
+			public const int button_select_a_photo_in_album = 2131427452;
 			
-			// aapt resource value: 0x7f0b007a
-			public const int button_take_a_photo = 2131427450;
+			// aapt resource value: 0x7f0b007b
+			public const int button_take_a_photo = 2131427451;
 			
 			// aapt resource value: 0x7f0b0090
 			public const int cancel_action = 2131427472;
@@ -1816,17 +1816,17 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0b005b
 			public const int detect = 2131427419;
 			
-			// aapt resource value: 0x7f0b006e
-			public const int detection = 2131427438;
+			// aapt resource value: 0x7f0b006f
+			public const int detection = 2131427439;
 			
 			// aapt resource value: 0x7f0b000c
 			public const int disableHome = 2131427340;
 			
-			// aapt resource value: 0x7f0b0079
-			public const int done_and_save = 2131427449;
+			// aapt resource value: 0x7f0b007a
+			public const int done_and_save = 2131427450;
 			
-			// aapt resource value: 0x7f0b0075
-			public const int edit_person_name = 2131427445;
+			// aapt resource value: 0x7f0b0076
+			public const int edit_person_name = 2131427446;
 			
 			// aapt resource value: 0x7f0b0049
 			public const int edit_query = 2131427401;
@@ -1843,29 +1843,29 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0b003d
 			public const int expanded_menu = 2131427389;
 			
-			// aapt resource value: 0x7f0b0088
-			public const int face_thumbnail = 2131427464;
-			
-			// aapt resource value: 0x7f0b0063
-			public const int facial_similar_faces = 2131427427;
-			
-			// aapt resource value: 0x7f0b0071
-			public const int findSimilarFace = 2131427441;
+			// aapt resource value: 0x7f0b0089
+			public const int face_thumbnail = 2131427465;
 			
 			// aapt resource value: 0x7f0b0064
-			public const int find_similar_faces = 2131427428;
+			public const int facial_similar_faces = 2131427428;
 			
-			// aapt resource value: 0x7f0b0077
-			public const int gridView_faces = 2131427447;
-			
-			// aapt resource value: 0x7f0b0066
-			public const int group = 2131427430;
+			// aapt resource value: 0x7f0b0072
+			public const int findSimilarFace = 2131427442;
 			
 			// aapt resource value: 0x7f0b0065
-			public const int grouped_faces = 2131427429;
+			public const int find_similar_faces = 2131427429;
 			
-			// aapt resource value: 0x7f0b0070
-			public const int grouping = 2131427440;
+			// aapt resource value: 0x7f0b0078
+			public const int gridView_faces = 2131427448;
+			
+			// aapt resource value: 0x7f0b0067
+			public const int group = 2131427431;
+			
+			// aapt resource value: 0x7f0b0066
+			public const int grouped_faces = 2131427430;
+			
+			// aapt resource value: 0x7f0b0071
+			public const int grouping = 2131427441;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int home = 2131427332;
@@ -1879,11 +1879,11 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0b009c
 			public const int icon_group = 2131427484;
 			
-			// aapt resource value: 0x7f0b0072
-			public const int identification = 2131427442;
+			// aapt resource value: 0x7f0b0073
+			public const int identification = 2131427443;
 			
-			// aapt resource value: 0x7f0b006d
-			public const int identify = 2131427437;
+			// aapt resource value: 0x7f0b006e
+			public const int identify = 2131427438;
 			
 			// aapt resource value: 0x7f0b001f
 			public const int ifRoom = 2131427359;
@@ -1891,29 +1891,29 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0b0029
 			public const int image = 2131427369;
 			
-			// aapt resource value: 0x7f0b007f
-			public const int image_0 = 2131427455;
+			// aapt resource value: 0x7f0b0080
+			public const int image_0 = 2131427456;
 			
-			// aapt resource value: 0x7f0b0083
-			public const int image_1 = 2131427459;
+			// aapt resource value: 0x7f0b0084
+			public const int image_1 = 2131427460;
 			
 			// aapt resource value: 0x7f0b0057
 			public const int image_control = 2131427415;
 			
-			// aapt resource value: 0x7f0b007c
-			public const int image_control_0 = 2131427452;
+			// aapt resource value: 0x7f0b007d
+			public const int image_control_0 = 2131427453;
 			
-			// aapt resource value: 0x7f0b0080
-			public const int image_control_1 = 2131427456;
+			// aapt resource value: 0x7f0b0081
+			public const int image_control_1 = 2131427457;
 			
-			// aapt resource value: 0x7f0b0087
-			public const int image_face = 2131427463;
+			// aapt resource value: 0x7f0b0088
+			public const int image_face = 2131427464;
 			
 			// aapt resource value: 0x7f0b0056
 			public const int info = 2131427414;
 			
-			// aapt resource value: 0x7f0b008a
-			public const int item_log = 2131427466;
+			// aapt resource value: 0x7f0b008b
+			public const int item_log = 2131427467;
 			
 			// aapt resource value: 0x7f0b009d
 			public const int line1 = 2131427485;
@@ -1927,29 +1927,29 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0b0059
 			public const int list_detected_faces = 2131427417;
 			
-			// aapt resource value: 0x7f0b0061
-			public const int list_faces = 2131427425;
+			// aapt resource value: 0x7f0b0062
+			public const int list_faces = 2131427426;
 			
-			// aapt resource value: 0x7f0b007e
-			public const int list_faces_0 = 2131427454;
+			// aapt resource value: 0x7f0b007f
+			public const int list_faces_0 = 2131427455;
 			
-			// aapt resource value: 0x7f0b0082
-			public const int list_faces_1 = 2131427458;
+			// aapt resource value: 0x7f0b0083
+			public const int list_faces_1 = 2131427459;
 			
-			// aapt resource value: 0x7f0b006c
-			public const int list_identified_faces = 2131427436;
+			// aapt resource value: 0x7f0b006d
+			public const int list_identified_faces = 2131427437;
 			
 			// aapt resource value: 0x7f0b002b
 			public const int list_item = 2131427371;
 			
-			// aapt resource value: 0x7f0b006b
-			public const int list_person_groups_identify = 2131427435;
+			// aapt resource value: 0x7f0b006c
+			public const int list_person_groups_identify = 2131427436;
 			
-			// aapt resource value: 0x7f0b008b
-			public const int log = 2131427467;
+			// aapt resource value: 0x7f0b005d
+			public const int log = 2131427421;
 			
-			// aapt resource value: 0x7f0b0069
-			public const int manage_person_groups = 2131427433;
+			// aapt resource value: 0x7f0b006a
+			public const int manage_person_groups = 2131427434;
 			
 			// aapt resource value: 0x7f0b0092
 			public const int media_actions = 2131427474;
@@ -1981,20 +1981,20 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0b0030
 			public const int parentPanel = 2131427376;
 			
-			// aapt resource value: 0x7f0b006a
-			public const int person_group_content = 2131427434;
+			// aapt resource value: 0x7f0b006b
+			public const int person_group_content = 2131427435;
 			
-			// aapt resource value: 0x7f0b0067
-			public const int person_group_control = 2131427431;
+			// aapt resource value: 0x7f0b0068
+			public const int person_group_control = 2131427432;
+			
+			// aapt resource value: 0x7f0b0075
+			public const int person_name = 2131427445;
 			
 			// aapt resource value: 0x7f0b0074
-			public const int person_name = 2131427444;
+			public const int person_name_view = 2131427444;
 			
-			// aapt resource value: 0x7f0b0073
-			public const int person_name_view = 2131427443;
-			
-			// aapt resource value: 0x7f0b0076
-			public const int person_tip = 2131427446;
+			// aapt resource value: 0x7f0b0077
+			public const int person_tip = 2131427447;
 			
 			// aapt resource value: 0x7f0b0005
 			public const int progress_circular = 2131427333;
@@ -2056,20 +2056,20 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0b0055
 			public const int select_dialog_listview = 2131427413;
 			
-			// aapt resource value: 0x7f0b0085
-			public const int select_face_face_verification = 2131427461;
-			
 			// aapt resource value: 0x7f0b0086
-			public const int select_face_person_verification = 2131427462;
+			public const int select_face_face_verification = 2131427462;
+			
+			// aapt resource value: 0x7f0b0087
+			public const int select_face_person_verification = 2131427463;
 			
 			// aapt resource value: 0x7f0b0058
 			public const int select_image = 2131427416;
 			
-			// aapt resource value: 0x7f0b007d
-			public const int select_image_0 = 2131427453;
+			// aapt resource value: 0x7f0b007e
+			public const int select_image_0 = 2131427454;
 			
-			// aapt resource value: 0x7f0b0081
-			public const int select_image_1 = 2131427457;
+			// aapt resource value: 0x7f0b0082
+			public const int select_image_1 = 2131427458;
 			
 			// aapt resource value: 0x7f0b003f
 			public const int shortcut = 2131427391;
@@ -2083,8 +2083,8 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0b0011
 			public const int showTitle = 2131427345;
 			
-			// aapt resource value: 0x7f0b0062
-			public const int similar_faces = 2131427426;
+			// aapt resource value: 0x7f0b0063
+			public const int similar_faces = 2131427427;
 			
 			// aapt resource value: 0x7f0b002f
 			public const int spacer = 2131427375;
@@ -2125,14 +2125,14 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0b0034
 			public const int textSpacerNoTitle = 2131427380;
 			
-			// aapt resource value: 0x7f0b005e
-			public const int text_all_faces = 2131427422;
+			// aapt resource value: 0x7f0b005f
+			public const int text_all_faces = 2131427423;
 			
-			// aapt resource value: 0x7f0b0089
-			public const int text_detected_face = 2131427465;
+			// aapt resource value: 0x7f0b008a
+			public const int text_detected_face = 2131427466;
 			
-			// aapt resource value: 0x7f0b0068
-			public const int text_person_group_selected = 2131427432;
+			// aapt resource value: 0x7f0b0069
+			public const int text_person_group_selected = 2131427433;
 			
 			// aapt resource value: 0x7f0b0097
 			public const int time = 2131427479;
@@ -2158,11 +2158,11 @@ namespace XamarinFaceAPI.Droid
 			// aapt resource value: 0x7f0b0012
 			public const int useLogo = 2131427346;
 			
-			// aapt resource value: 0x7f0b006f
-			public const int verification = 2131427439;
+			// aapt resource value: 0x7f0b0070
+			public const int verification = 2131427440;
 			
-			// aapt resource value: 0x7f0b0084
-			public const int verify = 2131427460;
+			// aapt resource value: 0x7f0b0085
+			public const int verify = 2131427461;
 			
 			// aapt resource value: 0x7f0b005c
 			public const int view_log = 2131427420;
@@ -2296,94 +2296,100 @@ namespace XamarinFaceAPI.Droid
 			public const int activity_detection = 2130968603;
 			
 			// aapt resource value: 0x7f04001c
-			public const int activity_find_similar_face = 2130968604;
+			public const int activity_detection_log = 2130968604;
 			
 			// aapt resource value: 0x7f04001d
-			public const int activity_grouping = 2130968605;
+			public const int activity_find_similar_face = 2130968605;
 			
 			// aapt resource value: 0x7f04001e
-			public const int activity_identification = 2130968606;
+			public const int activity_grouping = 2130968606;
 			
 			// aapt resource value: 0x7f04001f
-			public const int activity_main = 2130968607;
+			public const int activity_identification = 2130968607;
 			
 			// aapt resource value: 0x7f040020
-			public const int activity_person = 2130968608;
+			public const int activity_main = 2130968608;
 			
 			// aapt resource value: 0x7f040021
-			public const int activity_select_image = 2130968609;
+			public const int activity_person = 2130968609;
 			
 			// aapt resource value: 0x7f040022
-			public const int activity_verification = 2130968610;
+			public const int activity_select_image = 2130968610;
 			
 			// aapt resource value: 0x7f040023
-			public const int activity_verification_menu = 2130968611;
+			public const int activity_verification = 2130968611;
 			
 			// aapt resource value: 0x7f040024
-			public const int item_face = 2130968612;
+			public const int activity_verification_log = 2130968612;
 			
 			// aapt resource value: 0x7f040025
-			public const int item_face_with_description = 2130968613;
+			public const int activity_verification_menu = 2130968613;
 			
 			// aapt resource value: 0x7f040026
-			public const int item_log = 2130968614;
+			public const int item_face = 2130968614;
 			
 			// aapt resource value: 0x7f040027
-			public const int notification_action = 2130968615;
+			public const int item_face_with_description = 2130968615;
 			
 			// aapt resource value: 0x7f040028
-			public const int notification_action_tombstone = 2130968616;
+			public const int item_log = 2130968616;
 			
 			// aapt resource value: 0x7f040029
-			public const int notification_media_action = 2130968617;
+			public const int notification_action = 2130968617;
 			
 			// aapt resource value: 0x7f04002a
-			public const int notification_media_cancel_action = 2130968618;
+			public const int notification_action_tombstone = 2130968618;
 			
 			// aapt resource value: 0x7f04002b
-			public const int notification_template_big_media = 2130968619;
+			public const int notification_media_action = 2130968619;
 			
 			// aapt resource value: 0x7f04002c
-			public const int notification_template_big_media_custom = 2130968620;
+			public const int notification_media_cancel_action = 2130968620;
 			
 			// aapt resource value: 0x7f04002d
-			public const int notification_template_big_media_narrow = 2130968621;
+			public const int notification_template_big_media = 2130968621;
 			
 			// aapt resource value: 0x7f04002e
-			public const int notification_template_big_media_narrow_custom = 2130968622;
+			public const int notification_template_big_media_custom = 2130968622;
 			
 			// aapt resource value: 0x7f04002f
-			public const int notification_template_custom_big = 2130968623;
+			public const int notification_template_big_media_narrow = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int notification_template_icon_group = 2130968624;
+			public const int notification_template_big_media_narrow_custom = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int notification_template_lines_media = 2130968625;
+			public const int notification_template_custom_big = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int notification_template_media = 2130968626;
+			public const int notification_template_icon_group = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int notification_template_media_custom = 2130968627;
+			public const int notification_template_lines_media = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int notification_template_part_chronometer = 2130968628;
+			public const int notification_template_media = 2130968628;
 			
 			// aapt resource value: 0x7f040035
-			public const int notification_template_part_time = 2130968629;
+			public const int notification_template_media_custom = 2130968629;
 			
 			// aapt resource value: 0x7f040036
-			public const int select_dialog_item_material = 2130968630;
+			public const int notification_template_part_chronometer = 2130968630;
 			
 			// aapt resource value: 0x7f040037
-			public const int select_dialog_multichoice_material = 2130968631;
+			public const int notification_template_part_time = 2130968631;
 			
 			// aapt resource value: 0x7f040038
-			public const int select_dialog_singlechoice_material = 2130968632;
+			public const int select_dialog_item_material = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int support_simple_spinner_dropdown_item = 2130968633;
+			public const int select_dialog_multichoice_material = 2130968633;
+			
+			// aapt resource value: 0x7f04003a
+			public const int select_dialog_singlechoice_material = 2130968634;
+			
+			// aapt resource value: 0x7f04003b
+			public const int support_simple_spinner_dropdown_item = 2130968635;
 			
 			static Layout()
 			{

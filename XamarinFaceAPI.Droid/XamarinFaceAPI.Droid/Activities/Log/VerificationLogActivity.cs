@@ -15,8 +15,8 @@ using XamarinFaceAPI.Droid.Helpers;
 
 namespace XamarinFaceAPI.Droid.Log
 {
-	[Activity(Name = "XamarinFaceAPI.Droid.Activities.Log.DetectionLogActivity")]
-	public class DetectionLogActivity : Activity
+	[Activity(Name = "XamarinFaceAPI.Droid.Activities.Log.VerificationLogActivity")]
+	public class VerificationLogActivity : Activity
 	{
 		private ListView logListView = null;
 
@@ -39,11 +39,11 @@ namespace XamarinFaceAPI.Droid.Log
 		private class LogAdapter : BaseAdapter
 		{
 			private List<string> log;
-			private DetectionLogActivity activity;
+			private VerificationLogActivity activity;
 
-			public LogAdapter(DetectionLogActivity act)
+			public LogAdapter(VerificationLogActivity act)
 			{
-				this.log = LogHelper.GetDetectionLog();
+				this.log = LogHelper.GetVerificationLog();
 				this.activity = act;
 			}
 
