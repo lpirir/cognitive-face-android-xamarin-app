@@ -7,7 +7,7 @@ using Java.IO;
 using Java.Lang;
 using Xamarin.Cognitive.Face.Android.Contract;
 
-namespace XamarinFaceAPI.Droid
+namespace XamarinFaceAPI.Droid.Helpers
 {
 	public class ImageHelper
 	{

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -16,6 +17,8 @@ using Java.IO;
 using Java.Lang;
 using Xamarin.Cognitive.Face.Android;
 using Xamarin.Cognitive.Face.Android.Contract;
+using XamarinFaceAPI.Droid.Helpers;
+using XamarinFaceAPI.Droid.Log;
 
 namespace XamarinFaceAPI.Droid
 {
@@ -23,21 +26,14 @@ namespace XamarinFaceAPI.Droid
 	public class DetectionActivity : Activity
 	{
 		private const int REQUEST_SELECT_IMAGE = 0;
-		private FaceServiceRestClient faceServiceClient = null;
 		private Button select_image, detect, view_log = null;
-		private static Bitmap mBitmap = null;
-		private ImageView image = null;
-		private static TextView info, text_detected_face = null;
-		private ListView list_detected_faces = null;
+		private Bitmap mBitmap = null;
 		private ProgressDialog mProgressDialog = null;
 		private Android.Net.Uri mImageUri = null;
-
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-
-			faceServiceClient = new FaceServiceRestClient("");
 
 			// Create your application here
 			SetContentView(Resource.Layout.activity_detection);
@@ -54,14 +50,6 @@ namespace XamarinFaceAPI.Droid
 			view_log = FindViewById<Button>(Resource.Id.view_log);
 			view_log.Click += View_Log_Click;
 
-			image = FindViewById<ImageView>(Resource.Id.image);
-
-			info = FindViewById<TextView>(Resource.Id.info);
-
-			text_detected_face = FindViewById<TextView>(Resource.Id.text_detected_face);
-
-			list_detected_faces = FindViewById<ListView>(Resource.Id.list_detected_faces);
-
 			SetDetectButtonEnabledStatus(false);
 
 			LogHelper.ClearDetectionLog();
@@ -72,6 +60,7 @@ namespace XamarinFaceAPI.Droid
 			base.OnDestroy();
 			select_image.Click -= Select_Image_Click;
 			detect.Click -= Detect_Click;
+			view_log.Click -= View_Log_Click;
 		}
 
 		protected override void OnSaveInstanceState(Bundle outState)
@@ -102,12 +91,18 @@ namespace XamarinFaceAPI.Droid
 						mBitmap = ImageHelper.LoadSizeLimitedBitmapFromUri(mImageUri, this.ContentResolver);
 						if (mBitmap != null)
 						{
+							ImageView image = FindViewById<ImageView>(Resource.Id.image);
 							image.SetImageBitmap(mBitmap);
 							AddLog("Image: " + mImageUri + " resized to " + mBitmap.Width + "x" + mBitmap.Height);
 						}
 
-						//FaceListAdapter
+						FaceListAdapter faceListAdapter = new FaceListAdapter(null, this);
+						ListView list_detected_faces = FindViewById<ListView>(Resource.Id.list_detected_faces);
+						list_detected_faces.Adapter = faceListAdapter;
 
+						SetInfo("");
+
+						SetDetectButtonEnabledStatus(true);
 					}
 					break;
 				default:
@@ -123,25 +118,22 @@ namespace XamarinFaceAPI.Droid
 
 		void Detect_Click(object sender, EventArgs e)
 		{
-			//// Put the image into an input stream for detection.
-			//ByteArrayOutputStream output = new ByteArrayOutputStream();
-			//mBitmap.Compress(Bitmap.CompressFormat.Jpeg, 100, output);
-			//ByteArrayInputStream inputStream = new ByteArrayInputStream(output.ToByteArray());
+			MemoryStream output = new MemoryStream();
+			mBitmap.Compress(Bitmap.CompressFormat.Jpeg, 100, output);
+			ByteArrayInputStream inputStream = new ByteArrayInputStream(output.ToArray());
 
-			//// Start a background task to detect faces in the image.
-			//new DetectionTask().execute(inputStream);
+			new DetectionTask(this).Execute(inputStream);
 
-			//// Prevent button click during detecting.
-			//SetAllButtonsEnabledStatus(false);
+			SetAllButtonsEnabledStatus(false);
 		}
 
 		void View_Log_Click(object sender, EventArgs e)
 		{
-			//Intent intent = new Intent(this, typeof(SelectImageActivity));
-			//this.StartActivityForResult(intent, REQUEST_SELECT_IMAGE);
+			Intent intent = new Intent(this, typeof(DetectionLogActivity));
+			this.StartActivity(intent);
 		}
 
-		private void SetUiAfterDetection(Face[] result, bool succeed)
+		private void SetUiAfterDetection(Face[] result, bool succeed, ListView list_detected_faces)
 		{
 			mProgressDialog.Dismiss();
 			SetAllButtonsEnabledStatus(true);
@@ -155,8 +147,9 @@ namespace XamarinFaceAPI.Droid
 					detectionResult = result.Length + " face"
 					   + (result.Length != 1 ? "s" : "") + " detected";
 
+					ImageView image = FindViewById<ImageView>(Resource.Id.image);
 					image.SetImageBitmap(ImageHelper.DrawFaceRectanglesOnBitmap(mBitmap, result, true));
-					FaceListAdapter faceListAdapter = new FaceListAdapter(result);
+					FaceListAdapter faceListAdapter = new FaceListAdapter(result, this);
 					list_detected_faces.Adapter = faceListAdapter;
 				}
 				else
@@ -182,9 +175,10 @@ namespace XamarinFaceAPI.Droid
 			view_log.Enabled = isEnabled;
 		}
 
-		private static void SetInfo(string _info)
+		private void SetInfo(string inf)
 		{
-			info.Text = _info;
+			TextView info = FindViewById<TextView>(Resource.Id.info);
+			info.Text = inf;
 		}
 
 		private void AddLog(string _log)
@@ -194,13 +188,15 @@ namespace XamarinFaceAPI.Droid
 
 		private class FaceListAdapter : BaseAdapter
 		{
-			List<Face> faces = null;
-			List<Bitmap> faceThumbnails = null;
+			private List<Face> faces;
+			private List<Bitmap> faceThumbnails;
+			private DetectionActivity activity;
 
-			public FaceListAdapter(Face[] detectionResult)
+			public FaceListAdapter(Face[] detectionResult, DetectionActivity act)
 			{
 				faces = new List<Face>();
 				faceThumbnails = new List<Bitmap>();
+				activity = act;
 
 				if (detectionResult != null)
 				{
@@ -209,11 +205,11 @@ namespace XamarinFaceAPI.Droid
 					{
 						try
 						{
-							faceThumbnails.Add(ImageHelper.GenerateFaceThumbnail(DetectionActivity.mBitmap, face.FaceRectangle));
+							faceThumbnails.Add(ImageHelper.GenerateFaceThumbnail(activity.mBitmap, face.FaceRectangle));
 						}
-						catch (IOException ex)
+						catch (Java.IO.IOException ex)
 						{
-							DetectionActivity.SetInfo(ex.Message);
+							activity.SetInfo(ex.Message);
 						}
 					}
 				}
@@ -264,6 +260,7 @@ namespace XamarinFaceAPI.Droid
 						GetHeadPose(faces[position].FaceAttributes.HeadPose)
 						);
 
+				TextView text_detected_face = activity.FindViewById<TextView>(Resource.Id.text_detected_face);
 				text_detected_face.Text = face_description;
 
 				return convertView;
@@ -326,6 +323,72 @@ namespace XamarinFaceAPI.Droid
 				return string.Format("Pitch: {0}, Roll: {1}, Yaw: {2}", headPose.Pitch, headPose.Roll, headPose.Yaw);
 			}
 
+		}
+
+		private class DetectionTask : AsyncTask<InputStream, Android.Resource.String, Face[]>
+		{
+			private bool mSucceed = true;
+			private DetectionActivity activity;
+
+			public DetectionTask(DetectionActivity act)
+			{
+				this.activity = act;
+			}
+
+			protected override Face[] RunInBackground(params InputStream[] @params)
+			{
+				// Get an instance of face service client to detect faces in image.
+				FaceServiceRestClient faceServiceClient = SampleApp.GetFaceServiceClient();
+				try
+				{
+					PublishProgress("Detecting...");
+
+					return null;
+					//return faceServiceClient.Detect(@params[0], true, true, new[] {
+					//	FaceServiceClientFaceAttributeType.Age,
+					//	FaceServiceClientFaceAttributeType.Gender,
+					//	FaceServiceClientFaceAttributeType.Smile,
+					//	FaceServiceClientFaceAttributeType.Glasses,
+					//	FaceServiceClientFaceAttributeType.FacialHair,
+					//	FaceServiceClientFaceAttributeType.Emotion,
+					//	FaceServiceClientFaceAttributeType.HeadPose
+					//});
+				}
+				catch (Java.Lang.Exception e)
+				{
+					mSucceed = false;
+					PublishProgress(e.Message);
+					activity.AddLog(e.Message);
+					return null;
+				}
+			}
+
+			protected override void OnPreExecute()
+			{
+				base.OnPreExecute();
+				activity.mProgressDialog.Show();
+				activity.AddLog("Request: Detecting in image " + activity.mImageUri);
+			}
+
+			protected override void OnProgressUpdate(params Android.Resource.String[] values)
+			{
+				base.OnProgressUpdate(values);
+				activity.mProgressDialog.SetMessage((string)values[0]);
+				activity.SetInfo((string)values[0]);
+			}
+
+			protected override void OnPostExecute(Face[] result)
+			{
+				base.OnPostExecute(result);
+				if (mSucceed)
+				{
+					activity.AddLog("Response: Success. Detected " + (result == null ? 0 : result.Length) + " face(s) in " + activity.mImageUri);
+				}
+
+				// Show the result on screen when detection is done.
+				ListView list_detected_faces = activity.FindViewById<ListView>(Resource.Id.list_detected_faces);
+				activity.SetUiAfterDetection(result, mSucceed, list_detected_faces);
+			}
 		}
 	}
 }
