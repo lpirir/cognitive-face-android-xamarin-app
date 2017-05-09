@@ -27,7 +27,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.helpers
 		public override void OnCreate()
 		{
 			base.OnCreate();
-			sFaceServiceClient = new FaceServiceRestClient("dd1bb5963dcd4d269e9cb296dde2dac5");
+			sFaceServiceClient = new FaceServiceRestClient(Context.Resources.GetString(Resource.String.subscription_key));
 		}
 
 		public static FaceServiceRestClient GetFaceServiceClient()

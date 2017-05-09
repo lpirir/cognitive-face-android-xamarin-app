@@ -3,7 +3,7 @@
 <resources>
     <!-- Please refer to https://www.microsoft.com/cognitive-services/en-us/ to get your subscription key -->
     <!-- If you have one subscription key, you can add it here to use the service -->
-    <string name="subscription_key">Please_add_the_subscription_key_here</string>
+    <string name="subscription_key">dd1bb5963dcd4d269e9cb296dde2dac5</string>
 
     <!-- Main activity -->
     <string name="detection">Detection</string>

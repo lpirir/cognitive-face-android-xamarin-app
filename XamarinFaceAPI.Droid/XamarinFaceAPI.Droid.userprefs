@@ -1,15 +1,16 @@
-﻿<Properties StartupConfiguration="{60693B0B-B870-49F1-B812-05D5A01B5580}|Default">
+﻿<Properties StartupConfiguration="{60693B0B-B870-49F1-B812-05D5A01B5580}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MonoDevelop.Ide.Workbench ActiveDocument="XamarinFaceAPI.Droid/ui/DetectionActivity.cs">
     <Files>
-      <File FileName="XamarinFaceAPI.Droid/ui/SelectImageActivity.cs" Line="32" Column="51" />
-      <File FileName="XamarinFaceAPI.Droid/ui/DetectionActivity.cs" Line="342" Column="57" />
+      <File FileName="XamarinFaceAPI.Droid/ui/DetectionActivity.cs" Line="92" Column="1" />
+      <File FileName="XamarinFaceAPI.Droid/ui/SelectImageActivity.cs" Line="60" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.XamarinFaceAPI.Droid PreferredExecutionTarget="Android.FA6AJBR02565" />
+  <MonoDevelop.Ide.ItemProperties.XamarinFaceAPI.Droid PreferredExecutionTarget="Android.Pixel_API_25" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" ActiveRuntime="Mono 5.0.0.94" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/rcervantes/GitHub/cognitive-face-android-xamarin-app/XamarinFaceAPI.Droid/XamarinFaceAPI.Droid/ui/SelectImageActivity.cs" relfile="XamarinFaceAPI.Droid/ui/SelectImageActivity.cs" line="88" column="1" />
+      <Breakpoint file="/Users/rcervantes/GitHub/cognitive-face-android-xamarin-app/XamarinFaceAPI.Droid/XamarinFaceAPI.Droid/ui/DetectionActivity.cs" relfile="XamarinFaceAPI.Droid/ui/DetectionActivity.cs" line="350" column="58" />
+      <Breakpoint file="/Users/rcervantes/GitHub/cognitive-face-android-xamarin-app/XamarinFaceAPI.Droid/XamarinFaceAPI.Droid/ui/DetectionActivity.cs" relfile="XamarinFaceAPI.Droid/ui/DetectionActivity.cs" line="122" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
