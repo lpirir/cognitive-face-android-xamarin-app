@@ -11,19 +11,20 @@ using Android.Graphics;
 using Android.Icu.Text;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Java.IO;
 using Java.Lang;
 using Xamarin.Cognitive.Face.Android;
 using Xamarin.Cognitive.Face.Android.Contract;
-using XamarinFaceAPI.Droid.Helpers;
-using XamarinFaceAPI.Droid.Log;
+using com.rcervantes.xamarinfaceapi_droid.helpers;
+using com.rcervantes.xamarinfaceapi_droid.log;
 
-namespace XamarinFaceAPI.Droid
+namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-	[Activity(Name = "XamarinFaceAPI.Droid.Activities.UI.DetectionActivity")]
-	public class DetectionActivity : Activity
+    [Activity(Name="com.rcervantes.xamarinfaceapi_droid.ui.DetectionActivity", Label = "@string/detection", ParentActivity = typeof(MainActivity))]
+	public class DetectionActivity : AppCompatActivity
 	{
 		private const int REQUEST_SELECT_IMAGE = 0;
 		private Button select_image, detect, view_log = null;
@@ -338,7 +339,7 @@ namespace XamarinFaceAPI.Droid
 			protected override Face[] RunInBackground(params InputStream[] @params)
 			{
 				// Get an instance of face service client to detect faces in image.
-				FaceServiceRestClient faceServiceClient = SampleApp.GetFaceServiceClient();
+				FaceServiceRestClient faceServiceClient = StartupApp.GetFaceServiceClient();
 				try
 				{
 					PublishProgress("Detecting...");

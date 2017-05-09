@@ -10,6 +10,7 @@ using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Java.IO;
@@ -18,13 +19,13 @@ using Java.Text;
 using Java.Util;
 using Xamarin.Cognitive.Face.Android;
 using Xamarin.Cognitive.Face.Android.Contract;
-using XamarinFaceAPI.Droid.Helpers;
-using XamarinFaceAPI.Droid.Log;
+using com.rcervantes.xamarinfaceapi_droid.helpers;
+using com.rcervantes.xamarinfaceapi_droid.log;
 
-namespace XamarinFaceAPI.Droid
+namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-	[Activity(Name = "XamarinFaceAPI.Droid.Activities.UI.FaceVerificationActivity")]
-	public class FaceVerificationActivity : Activity
+	[Activity(Name="com.rcervantes.xamarinfaceapi_droid.ui.FaceVerificationActivity", Label = "@string/face_verification", ParentActivity = typeof(MainActivity))]
+	public class FaceVerificationActivity : AppCompatActivity
 	{
 		private static int REQUEST_SELECT_IMAGE_0 = 0;
 		private static int REQUEST_SELECT_IMAGE_1 = 1;
@@ -437,7 +438,7 @@ namespace XamarinFaceAPI.Droid
 			protected override VerifyResult RunInBackground(params Java.Lang.Void[] @params)
 			{
 				// Get an instance of face service client to detect faces in image.
-				FaceServiceRestClient faceServiceClient = SampleApp.GetFaceServiceClient();
+				FaceServiceRestClient faceServiceClient = StartupApp.GetFaceServiceClient();
 				try
 				{
 					PublishProgress("Verifying...");
@@ -497,7 +498,7 @@ namespace XamarinFaceAPI.Droid
 			protected override Face[] RunInBackground(params InputStream[] @params)
 			{
 				// Get an instance of face service client to detect faces in image.
-				FaceServiceRestClient faceServiceClient = SampleApp.GetFaceServiceClient();
+				FaceServiceRestClient faceServiceClient = StartupApp.GetFaceServiceClient();
 				try
 				{
 					PublishProgress("Detecting...");

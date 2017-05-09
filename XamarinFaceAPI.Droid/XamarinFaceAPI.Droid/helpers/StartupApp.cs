@@ -13,11 +13,16 @@ using Android.Views;
 using Android.Widget;
 using Xamarin.Cognitive.Face.Android;
 
-namespace XamarinFaceAPI.Droid.Helpers
+namespace com.rcervantes.xamarinfaceapi_droid.helpers
 {
-	public class SampleApp : Application
+    [Application]
+	public class StartupApp : Application
 	{
-		private static FaceServiceRestClient sFaceServiceClient;
+		private static FaceServiceRestClient sFaceServiceClient = null;
+
+		public StartupApp(IntPtr javaReference, JniHandleOwnership transfer): base(javaReference, transfer)
+        {
+        }
 
 		public override void OnCreate()
 		{

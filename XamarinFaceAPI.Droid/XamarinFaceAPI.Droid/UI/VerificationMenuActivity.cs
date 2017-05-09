@@ -8,13 +8,14 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 
-namespace XamarinFaceAPI.Droid
+namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-	[Activity(Name = "XamarinFaceAPI.Droid.Activities.UI.VerificationMenuActivity")]
-	public class VerificationMenuActivity : Activity
+	[Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.VerificationMenuActivity", Label = "@string/verification")]
+	public class VerificationMenuActivity : AppCompatActivity
 	{
 		private Button select_face_face_verification, select_face_person_verification = null;
 

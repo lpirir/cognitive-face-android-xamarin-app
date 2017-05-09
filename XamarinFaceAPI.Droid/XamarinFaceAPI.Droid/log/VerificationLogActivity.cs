@@ -8,15 +8,17 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
-using XamarinFaceAPI.Droid.Helpers;
+using com.rcervantes.xamarinfaceapi_droid.helpers;
+using com.rcervantes.xamarinfaceapi_droid.ui;
 
-namespace XamarinFaceAPI.Droid.Log
+namespace com.rcervantes.xamarinfaceapi_droid.log
 {
-	[Activity(Name = "XamarinFaceAPI.Droid.Activities.Log.DetectionLogActivity")]
-	public class DetectionLogActivity : Activity
+	[Activity(Name = "com.rcervantes.xamarinfaceapi_droid.log.VerificationLogActivity", Label = "@string/verification_log", ParentActivity = typeof(FaceVerificationActivity))]
+	public class VerificationLogActivity : AppCompatActivity
 	{
 		private ListView logListView = null;
 
@@ -39,11 +41,11 @@ namespace XamarinFaceAPI.Droid.Log
 		private class LogAdapter : BaseAdapter
 		{
 			private List<string> log;
-			private DetectionLogActivity activity;
+			private VerificationLogActivity activity;
 
-			public LogAdapter(DetectionLogActivity act)
+			public LogAdapter(VerificationLogActivity act)
 			{
-				this.log = LogHelper.GetDetectionLog();
+				this.log = LogHelper.GetVerificationLog();
 				this.activity = act;
 			}
 

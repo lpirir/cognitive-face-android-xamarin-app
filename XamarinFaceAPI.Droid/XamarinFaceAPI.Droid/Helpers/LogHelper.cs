@@ -4,7 +4,7 @@ using Android.Icu.Text;
 using Android.Icu.Util;
 using Java.Util;
 
-namespace XamarinFaceAPI.Droid.Helpers
+namespace com.rcervantes.xamarinfaceapi_droid.helpers
 {
 	public class LogHelper
 	{

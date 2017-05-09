@@ -3,11 +3,12 @@ using Android.Widget;
 using Android.OS;
 using Android.Views;
 using Android.Content;
+using Android.Support.V7.App;
 
-namespace XamarinFaceAPI.Droid.Activities.UI
+namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-	[Activity(Name = "XamarinFaceAPI.Droid.Activities.UI.MainActivity")]
-	public class MainActivity : Activity
+	[Activity(Name="com.rcervantes.xamarinfaceapi_droid.ui.MainActivity", Label = "@string/app_name", MainLauncher = true)]
+	public class MainActivity : AppCompatActivity
 	{
 		private Button detection, verification, grouping, findSimilarFace, identification = null;
 
