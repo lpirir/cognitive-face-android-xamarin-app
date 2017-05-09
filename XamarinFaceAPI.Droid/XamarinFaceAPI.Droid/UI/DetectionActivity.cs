@@ -20,6 +20,7 @@ using Xamarin.Cognitive.Face.Android;
 using Xamarin.Cognitive.Face.Android.Contract;
 using com.rcervantes.xamarinfaceapi_droid.helpers;
 using com.rcervantes.xamarinfaceapi_droid.log;
+using Android.Graphics.Drawables;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
@@ -119,12 +120,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
 
         void Detect_Click(object sender, EventArgs e)
         {
-            MemoryStream output = new MemoryStream();
-            mBitmap.Compress(Bitmap.CompressFormat.Jpeg, 100, output);
-            //ByteArrayInputStream inputStream = new ByteArrayInputStream(output.ToArray());
-
-            new DetectionTask(this).Execute(output);
-
+            new DetectionTask(this).Execute();
             SetAllButtonsEnabledStatus(false);
         }
 
@@ -326,7 +322,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
 
         }
 
-        private class DetectionTask : AsyncTask<Stream, Java.Lang.String, bool>
+        private class DetectionTask : AsyncTask<Java.Lang.Void, Java.Lang.String, bool>
         {
             private DetectionActivity activity;
             private Face[] faces = null;
@@ -336,7 +332,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
                 this.activity = act;
             }
 
-            protected override bool RunInBackground(params Stream[] @params)
+            protected override bool RunInBackground(params Java.Lang.Void[] @params)
             {
                 // Get an instance of face service client to detect faces in image.
                 FaceServiceRestClient faceServiceClient = StartupApp.GetFaceServiceClient();
@@ -347,15 +343,23 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
                 {
                     PublishProgress("Detecting...");
 
-                    faces = faceServiceClient.Detect(@params[0], true, true, new[] {
-                        FaceServiceClientFaceAttributeType.Age,
-                        FaceServiceClientFaceAttributeType.Gender,
-                        FaceServiceClientFaceAttributeType.Smile,
-                        FaceServiceClientFaceAttributeType.Glasses,
-                        FaceServiceClientFaceAttributeType.FacialHair,
-                        FaceServiceClientFaceAttributeType.Emotion,
-                        FaceServiceClientFaceAttributeType.HeadPose
-                    });
+					var pre_output = new MemoryStream();
+					activity.mBitmap.Compress(Bitmap.CompressFormat.Jpeg, 100, pre_output);
+					ByteArrayInputStream inputStream = new ByteArrayInputStream(pre_output.ToArray());
+					byte[] arr = new byte[inputStream.Available()];
+					inputStream.Read(arr);
+					var output = new MemoryStream(arr);
+
+                    faces = faceServiceClient.Detect(output, true, true, new[] {
+                                    FaceServiceClientFaceAttributeType.Age,
+                                    FaceServiceClientFaceAttributeType.Gender,
+                                    FaceServiceClientFaceAttributeType.Smile,
+                                    FaceServiceClientFaceAttributeType.Glasses,
+                                    FaceServiceClientFaceAttributeType.FacialHair,
+                                    FaceServiceClientFaceAttributeType.Emotion,
+                                    FaceServiceClientFaceAttributeType.HeadPose
+                                });
+
                 }
                 catch (Java.Lang.Exception e)
                 {
@@ -376,9 +380,9 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
 
             protected override void OnProgressUpdate(params Java.Lang.String[] values)
             {
-            	base.OnProgressUpdate(values);
-            	activity.mProgressDialog.SetMessage((string)values[0]);
-            	activity.SetInfo((string)values[0]);
+                base.OnProgressUpdate(values);
+                activity.mProgressDialog.SetMessage((string)values[0]);
+                activity.SetInfo((string)values[0]);
             }
 
             protected override void OnPostExecute(bool result)
@@ -394,6 +398,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
                 ListView list_detected_faces = activity.FindViewById<ListView>(Resource.Id.list_detected_faces);
                 activity.SetUiAfterDetection(faces, result, list_detected_faces);
             }
+
         }
     }
 }
