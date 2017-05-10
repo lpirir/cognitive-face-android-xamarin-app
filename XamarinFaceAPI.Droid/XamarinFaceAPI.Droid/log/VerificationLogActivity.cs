@@ -27,7 +27,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.log
 			base.OnCreate(savedInstanceState);
 
 			// Create your application here
-			SetContentView(Resource.Layout.activity_detection_log);
+			SetContentView(Resource.Layout.activity_verification_log);
 
 			logListView = FindViewById<ListView>(Resource.Id.log);
 			logListView.Adapter = new LogAdapter(this);

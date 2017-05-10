@@ -14,7 +14,7 @@ using Android.Widget;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-	[Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.VerificationMenuActivity", Label = "@string/verification")]
+	[Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.VerificationMenuActivity", Label = "@string/verification", ParentActivity = typeof(MainActivity))]
 	public class VerificationMenuActivity : AppCompatActivity
 	{
 		private Button select_face_face_verification, select_face_person_verification = null;
