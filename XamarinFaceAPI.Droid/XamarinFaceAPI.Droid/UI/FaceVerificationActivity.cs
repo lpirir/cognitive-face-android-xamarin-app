@@ -21,6 +21,7 @@ using Xamarin.Cognitive.Face.Android;
 using Xamarin.Cognitive.Face.Android.Contract;
 using com.rcervantes.xamarinfaceapi_droid.helpers;
 using com.rcervantes.xamarinfaceapi_droid.log;
+using com.rcervantes.xamarinfaceapi_droid.client;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
@@ -29,18 +30,13 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
     {
         private static int REQUEST_SELECT_IMAGE_0 = 0;
         private static int REQUEST_SELECT_IMAGE_1 = 1;
-
         private UUID mFaceId0 = null;
         private UUID mFaceId1 = null;
-
         private Bitmap mBitmap0 = null;
         private Bitmap mBitmap1 = null;
-
-        private FaceListAdapter mFaceListAdapter0;
-        private FaceListAdapter mFaceListAdapter1;
-
+        private FaceListAdapter mFaceListAdapter0 = null;
+        private FaceListAdapter mFaceListAdapter1 = null;
         private ProgressDialog mProgressDialog = null;
-
         private Button select_image_0, select_image_1, view_log, verify = null;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -51,33 +47,31 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             SetContentView(Resource.Layout.activity_verification);
 
             mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.SetTitle(Resource.String.progress_dialog_title);
+            mProgressDialog.SetTitle(Application.Context.GetString(Resource.String.progress_dialog_title));
 
             select_image_0 = FindViewById<Button>(Resource.Id.select_image_0);
-            select_image_0.Click += Select_Image_0_Click;
-
             select_image_1 = FindViewById<Button>(Resource.Id.select_image_1);
-            select_image_1.Click += Select_Image_1_Click;
-
             view_log = FindViewById<Button>(Resource.Id.view_log);
-            view_log.Click += View_Log_Click;
-
             verify = FindViewById<Button>(Resource.Id.verify);
-            verify.Click += Verify_Click;
 
             ClearDetectedFaces(0);
-
             ClearDetectedFaces(1);
-
-            // Disable button "verify" as the two face IDs to verify are not ready.
             SetVerifyButtonEnabledStatus(false);
-
             LogHelper.ClearVerificationLog();
         }
 
-        protected override void OnDestroy()
+        protected override void OnResume()
         {
-            base.OnDestroy();
+            base.OnResume();
+            select_image_0.Click += Select_Image_0_Click;
+            select_image_1.Click += Select_Image_1_Click;
+            view_log.Click += View_Log_Click;
+            verify.Click += Verify_Click;
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
             select_image_0.Click -= Select_Image_0_Click;
             select_image_1.Click -= Select_Image_1_Click;
             view_log.Click -= View_Log_Click;
@@ -143,23 +137,56 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             imageView.SetImageResource(Android.Resource.Color.Transparent);
         }
 
-        void Select_Image_0_Click(object sender, EventArgs e)
+        private void Select_Image_0_Click(object sender, EventArgs e)
         {
             SelectImage(0);
         }
 
-        void Select_Image_1_Click(object sender, EventArgs e)
+        private void Select_Image_1_Click(object sender, EventArgs e)
         {
             SelectImage(1);
         }
 
-        void Verify_Click(object sender, EventArgs e)
+        private void Verify_Click(object sender, EventArgs e)
         {
             SetAllButtonEnabledStatus(false);
-            new VerificationTask(mFaceId0, mFaceId1, this).Execute();
+            ExecuteVerification();
         }
 
-        void View_Log_Click(object sender, EventArgs e)
+		private async void ExecuteVerification()
+		{
+			VerifyResult verify_result = null;
+
+			mProgressDialog.Show();
+			AddLog("Request: Verifying face " + mFaceId0 + " and face " + mFaceId1);
+
+			try
+			{
+				var faceClient = new FaceClient();
+				mProgressDialog.SetMessage("Verifying...");
+				SetInfo("Verifying...");
+				verify_result = await faceClient.Verify(mFaceId0, mFaceId1);
+			}
+			catch (Java.Lang.Exception e)
+			{
+				AddLog(e.Message);
+			}
+
+			RunOnUiThread(() =>
+			{
+				if (verify_result != null)
+				{
+					AddLog("Response: Success. Face " + mFaceId0 + " and face "
+							+ mFaceId1 + (verify_result.IsIdentical ? " " : " don't ")
+							+ "belong to the same person");
+				}
+
+				// Show the result on screen when verification is done.
+				SetUiAfterVerification(verify_result);
+			});
+		}
+
+        private void View_Log_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(VerificationLogActivity));
             StartActivity(intent);
@@ -320,9 +347,54 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
 
         private void Detect(Bitmap bitmap, int index)
         {
-            new DetectionTask(index, this).Execute();
+            ExecuteDetection(index);
             SetSelectImageButtonEnabledStatus(false, index);
-            SetInfo("Detecting...");
+        }
+
+        private async void ExecuteDetection(int mIndex)
+        {
+            Face[] faces = null;
+            bool mSucceed = true;
+
+            mProgressDialog.Show();
+            AddLog("Request: Detecting in image " + mIndex);
+
+            try
+            {
+                var faceClient = new FaceClient();
+                using (MemoryStream pre_output = new MemoryStream())
+                {
+                    if (mIndex == 0)
+                    {
+                        mBitmap0.Compress(Bitmap.CompressFormat.Jpeg, 100, pre_output);
+                    }
+                    else
+                    {
+                        mBitmap1.Compress(Bitmap.CompressFormat.Jpeg, 100, pre_output);
+                    }
+
+                    using (ByteArrayInputStream inputStream = new ByteArrayInputStream(pre_output.ToArray()))
+                    {
+                        byte[] arr = new byte[inputStream.Available()];
+                        inputStream.Read(arr);
+                        var output = new MemoryStream(arr);
+
+                        mProgressDialog.SetMessage("Detecting...");
+                        SetInfo("Detecting...");
+                        faces = await faceClient.Detect(output);
+                    }
+                }
+            }
+            catch (Java.Lang.Exception e)
+            {
+                mSucceed = false;
+                AddLog(e.Message);
+            }
+
+            RunOnUiThread(() =>
+            {
+                SetUiAfterDetection(faces, mIndex, mSucceed);
+            });
         }
 
         private void SetInfo(string _info)
@@ -414,153 +486,6 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
 
                 return convertView;
             }
-        }
-
-        private class VerificationTask : AsyncTask<Java.Lang.Void, Java.Lang.String, bool>
-        {
-            private UUID mFaceId0;
-            private UUID mFaceId1;
-            private FaceVerificationActivity activity;
-            private VerifyResult verify_result = null;
-
-            public VerificationTask(UUID faceId0, UUID faceId1, FaceVerificationActivity act)
-            {
-                this.mFaceId0 = faceId0;
-                this.mFaceId1 = faceId1;
-                this.activity = act;
-            }
-
-            protected override bool RunInBackground(params Java.Lang.Void[] @params)
-            {
-                // Get an instance of face service client to detect faces in image.
-                FaceServiceRestClient faceServiceClient = StartupApp.GetFaceServiceClient();
-
-                bool mSucceed = true;
-
-                try
-                {
-                    PublishProgress("Verifying...");
-
-                    verify_result = faceServiceClient.Verify(mFaceId0, mFaceId1);
-                }
-                catch (Java.Lang.Exception e)
-                {
-                    mSucceed = false;
-                    PublishProgress(e.Message);
-                    activity.AddLog(e.Message);
-                }
-
-				return mSucceed;
-            }
-
-            protected override void OnPreExecute()
-            {
-                base.OnPreExecute();
-                activity.mProgressDialog.Show();
-                activity.AddLog("Request: Verifying face " + mFaceId0 + " and face " + mFaceId1);
-            }
-
-            protected override void OnProgressUpdate(params Java.Lang.String[] values)
-            {
-                base.OnProgressUpdate(values);
-                activity.mProgressDialog.SetMessage((string)values[0]);
-                activity.SetInfo((string)values[0]);
-            }
-
-            protected override void OnPostExecute(bool result)
-            {
-                base.OnPostExecute(result);
-
-                if (verify_result != null)
-                {
-                    activity.AddLog("Response: Success. Face " + mFaceId0 + " and face "
-                            + mFaceId1 + (verify_result.IsIdentical ? " " : " don't ")
-                            + "belong to the same person");
-                }
-
-                // Show the result on screen when verification is done.
-                activity.SetUiAfterVerification(verify_result);
-            }
-        }
-
-        private class DetectionTask : AsyncTask<Java.Lang.Void, Java.Lang.String, bool>
-        {
-            private int mIndex;
-            private FaceVerificationActivity activity;
-            private Face[] faces = null;
-
-            public DetectionTask(int index, FaceVerificationActivity act)
-            {
-                this.mIndex = index;
-                this.activity = act;
-            }
-
-            protected override bool RunInBackground(params Java.Lang.Void[] @params)
-            {
-                // Get an instance of face service client to detect faces in image.
-                FaceServiceRestClient faceServiceClient = StartupApp.GetFaceServiceClient();
-
-                bool mSucceed = true;
-
-                try
-                {
-                    PublishProgress("Detecting...");
-
-                    var pre_output = new MemoryStream();
-
-                    if (mIndex == 0) { 
-                        activity.mBitmap0.Compress(Bitmap.CompressFormat.Jpeg, 100, pre_output);
-                    }
-                    else{
-                        activity.mBitmap1.Compress(Bitmap.CompressFormat.Jpeg, 100, pre_output);
-                    }
-
-                    ByteArrayInputStream inputStream = new ByteArrayInputStream(pre_output.ToArray());
-                    byte[] arr = new byte[inputStream.Available()];
-                    inputStream.Read(arr);
-                    var output = new MemoryStream(arr);
-
-                    faces = faceServiceClient.Detect(output, true, true, new[] {
-                                    FaceServiceClientFaceAttributeType.Age,
-                                    FaceServiceClientFaceAttributeType.Gender,
-                                    FaceServiceClientFaceAttributeType.Smile,
-                                    FaceServiceClientFaceAttributeType.Glasses,
-                                    FaceServiceClientFaceAttributeType.FacialHair,
-                                    FaceServiceClientFaceAttributeType.Emotion,
-                                    FaceServiceClientFaceAttributeType.HeadPose
-                                });
-
-                }
-                catch (Java.Lang.Exception e)
-                {
-                    mSucceed = false;
-                    PublishProgress(e.Message);
-                    activity.AddLog(e.Message);
-                }
-
-                return mSucceed;
-            }
-
-            protected override void OnPreExecute()
-            {
-                base.OnPreExecute();
-                activity.mProgressDialog.Show();
-                activity.AddLog("Request: Detecting in image " + mIndex);
-            }
-
-            protected override void OnProgressUpdate(params Java.Lang.String[] values)
-            {
-                base.OnProgressUpdate(values);
-                activity.mProgressDialog.SetMessage((string)values[0]);
-                activity.SetInfo((string)values[0]);
-            }
-
-            protected override void OnPostExecute(bool result)
-            {
-                base.OnPostExecute(result);
-                activity.SetUiAfterDetection(faces, mIndex, result);
-            }
-
         }
     }
 }

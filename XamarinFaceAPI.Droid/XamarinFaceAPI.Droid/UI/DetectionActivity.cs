@@ -21,6 +21,7 @@ using Xamarin.Cognitive.Face.Android.Contract;
 using com.rcervantes.xamarinfaceapi_droid.helpers;
 using com.rcervantes.xamarinfaceapi_droid.log;
 using Android.Graphics.Drawables;
+using com.rcervantes.xamarinfaceapi_droid.client;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
@@ -41,25 +42,27 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             SetContentView(Resource.Layout.activity_detection);
 
             mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.SetTitle("Please wait");
+            mProgressDialog.SetTitle(Application.Context.GetString(Resource.String.progress_dialog_title));
 
             select_image = FindViewById<Button>(Resource.Id.select_image);
-            select_image.Click += Select_Image_Click;
-
             detect = FindViewById<Button>(Resource.Id.detect);
-            detect.Click += Detect_Click;
-
             view_log = FindViewById<Button>(Resource.Id.view_log);
-            view_log.Click += View_Log_Click;
 
             SetDetectButtonEnabledStatus(false);
-
             LogHelper.ClearDetectionLog();
         }
 
-        protected override void OnDestroy()
+        protected override void OnResume()
         {
-            base.OnDestroy();
+            base.OnResume();
+            select_image.Click += Select_Image_Click;
+            detect.Click += Detect_Click;
+            view_log.Click += View_Log_Click;
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
             select_image.Click -= Select_Image_Click;
             detect.Click -= Detect_Click;
             view_log.Click -= View_Log_Click;
@@ -112,19 +115,62 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             }
         }
 
-        void Select_Image_Click(object sender, EventArgs e)
+        private void Select_Image_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(SelectImageActivity));
             this.StartActivityForResult(intent, REQUEST_SELECT_IMAGE);
         }
 
-        void Detect_Click(object sender, EventArgs e)
+        private void Detect_Click(object sender, EventArgs e)
         {
-            new DetectionTask(this).Execute();
+            ExecuteDetection();
             SetAllButtonsEnabledStatus(false);
         }
 
-        void View_Log_Click(object sender, EventArgs e)
+        private async void ExecuteDetection()
+        {
+            Face[] faces = null;
+            bool mSucceed = true;
+
+            mProgressDialog.Show();
+            AddLog("Request: Detecting in image " + mImageUri);
+
+            try
+            {
+                var faceClient = new FaceClient();
+                using (MemoryStream pre_output = new MemoryStream())
+                {
+                    mBitmap.Compress(Bitmap.CompressFormat.Jpeg, 100, pre_output);
+
+                    using (ByteArrayInputStream inputStream = new ByteArrayInputStream(pre_output.ToArray()))
+                    {
+                        byte[] arr = new byte[inputStream.Available()];
+                        inputStream.Read(arr);
+                        var output = new MemoryStream(arr);
+
+                        mProgressDialog.SetMessage("Detecting...");
+                        SetInfo("Detecting...");
+                        faces = await faceClient.Detect(output);
+                    }
+                }
+            }
+            catch (Java.Lang.Exception e)
+            {
+                mSucceed = false;
+                AddLog(e.Message);
+            }
+
+            RunOnUiThread(() =>
+            {
+                AddLog("Response: Success. Detected " + (faces == null ? 0 : faces.Length) + " face(s) in " + mImageUri);
+
+                // Show the result on screen when detection is done.
+                ListView list_detected_faces = FindViewById<ListView>(Resource.Id.list_detected_faces);
+                SetUiAfterDetection(faces, mSucceed, list_detected_faces);
+            });
+        }
+
+        private void View_Log_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(DetectionLogActivity));
             this.StartActivity(intent);
@@ -318,85 +364,6 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             private string GetHeadPose(HeadPose headPose)
             {
                 return string.Format("Pitch: {0}, Roll: {1}, Yaw: {2}", headPose.Pitch, headPose.Roll, headPose.Yaw);
-            }
-
-        }
-
-        private class DetectionTask : AsyncTask<Java.Lang.Void, Java.Lang.String, bool>
-        {
-            private DetectionActivity activity;
-            private Face[] faces = null;
-
-            public DetectionTask(DetectionActivity act)
-            {
-                this.activity = act;
-            }
-
-            protected override bool RunInBackground(params Java.Lang.Void[] @params)
-            {
-                // Get an instance of face service client to detect faces in image.
-                FaceServiceRestClient faceServiceClient = StartupApp.GetFaceServiceClient();
-
-                bool mSucceed = true;
-
-                try
-                {
-                    PublishProgress("Detecting...");
-
-					var pre_output = new MemoryStream();
-					activity.mBitmap.Compress(Bitmap.CompressFormat.Jpeg, 100, pre_output);
-					ByteArrayInputStream inputStream = new ByteArrayInputStream(pre_output.ToArray());
-					byte[] arr = new byte[inputStream.Available()];
-					inputStream.Read(arr);
-					var output = new MemoryStream(arr);
-
-                    faces = faceServiceClient.Detect(output, true, true, new[] {
-                                    FaceServiceClientFaceAttributeType.Age,
-                                    FaceServiceClientFaceAttributeType.Gender,
-                                    FaceServiceClientFaceAttributeType.Smile,
-                                    FaceServiceClientFaceAttributeType.Glasses,
-                                    FaceServiceClientFaceAttributeType.FacialHair,
-                                    FaceServiceClientFaceAttributeType.Emotion,
-                                    FaceServiceClientFaceAttributeType.HeadPose
-                                });
-
-                }
-                catch (Java.Lang.Exception e)
-                {
-                    mSucceed = false;
-                    PublishProgress(e.Message);
-                    activity.AddLog(e.Message);
-                }
-
-                return mSucceed;
-            }
-
-            protected override void OnPreExecute()
-            {
-                base.OnPreExecute();
-                activity.mProgressDialog.Show();
-                activity.AddLog("Request: Detecting in image " + activity.mImageUri);
-            }
-
-            protected override void OnProgressUpdate(params Java.Lang.String[] values)
-            {
-                base.OnProgressUpdate(values);
-                activity.mProgressDialog.SetMessage((string)values[0]);
-                activity.SetInfo((string)values[0]);
-            }
-
-            protected override void OnPostExecute(bool result)
-            {
-                base.OnPostExecute(result);
-
-                if (result)
-                {
-                    activity.AddLog("Response: Success. Detected " + (faces == null ? 0 : faces.Length) + " face(s) in " + activity.mImageUri);
-                }
-
-                // Show the result on screen when detection is done.
-                ListView list_detected_faces = activity.FindViewById<ListView>(Resource.Id.list_detected_faces);
-                activity.SetUiAfterDetection(faces, result, list_detected_faces);
             }
 
         }
