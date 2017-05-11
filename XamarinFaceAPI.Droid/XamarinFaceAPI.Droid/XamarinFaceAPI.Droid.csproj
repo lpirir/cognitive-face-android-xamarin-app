@@ -105,6 +105,8 @@
     <Compile Include="utils\Log.cs" />
     <Compile Include="helpers\StorageHelper.cs" />
     <Compile Include="persongroupmanagement\PersonGroupListActivity.cs" />
+    <Compile Include="persongroupmanagement\PersonGroupActivity.cs" />
+    <Compile Include="persongroupmanagement\PersonActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -141,6 +143,10 @@
     <AndroidResource Include="Resources\menu\menu_delete_items.xml" />
     <AndroidResource Include="Resources\layout\activity_verification_person.axml" />
     <AndroidResource Include="Resources\layout\item_person_group.axml" />
+    <AndroidResource Include="Resources\layout\activity_person_group_list.axml" />
+    <AndroidResource Include="Resources\layout\item_person_group_with_checkbox.axml" />
+    <AndroidResource Include="Resources\layout\activity_person_group.axml" />
+    <AndroidResource Include="Resources\layout\item_person.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\mipmap-hdpi\" />

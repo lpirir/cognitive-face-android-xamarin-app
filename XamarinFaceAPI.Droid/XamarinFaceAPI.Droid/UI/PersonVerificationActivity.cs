@@ -16,6 +16,7 @@ using Android.Widget;
 using com.rcervantes.xamarinfaceapi_droid.client;
 using com.rcervantes.xamarinfaceapi_droid.helpers;
 using com.rcervantes.xamarinfaceapi_droid.log;
+using com.rcervantes.xamarinfaceapi_droid.persongroupmanagement;
 using Java.IO;
 using Java.Text;
 using Java.Util;
@@ -88,6 +89,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             listView_persons.ItemClick -= ListView_Persons_ItemClick;
             listView_faces_0.ItemClick -= ListView_Faces_0_ItemClick;
             select_image_0.Click -= Select_Image_0_Click;
+			manage_persons.Click -= Manage_Persons_Click;
             verify.Click -= Verify_Click;
             view_log.Click -= View_Log_Click;
         }
@@ -98,14 +100,12 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             if (position > 0)
             {
                 String personGroupIdSelected = mPersonListAdapter.personGroupIds[position];
-                mPersonListAdapter.personGroupIds.Insert(
-                        position, mPersonListAdapter.personGroupIds[0]);
-                mPersonListAdapter.personGroupIds.Insert(0, personGroupIdSelected);
+                mPersonListAdapter.personGroupIds[position] = mPersonListAdapter.personGroupIds[0];
+                mPersonListAdapter.personGroupIds[0] = personGroupIdSelected;
 
                 String personIdSelected = mPersonListAdapter.personIdList[position];
-                mPersonListAdapter.personIdList.Insert(
-                        position, mPersonListAdapter.personIdList[0]);
-                mPersonListAdapter.personIdList.Insert(0, personIdSelected);
+                mPersonListAdapter.personIdList[position] = mPersonListAdapter.personIdList[0];
+                mPersonListAdapter.personIdList[0] = personIdSelected;
 
                 ListView listView = (ListView)FindViewById(Resource.Id.list_persons);
                 listView.Adapter = mPersonListAdapter;
@@ -121,7 +121,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             {
                 mPersonGroupId = mPersonListAdapter.personGroupIds[0];
                 mPersonId = UUID.FromString(mPersonListAdapter.personIdList[0]);
-                String personName = StorageHelper.GetPersonName(mPersonId.ToString(), mPersonGroupId, Application.Context);
+                String personName = StorageHelper.GetPersonName(mPersonId.ToString(), mPersonGroupId, this);
 
                 RefreshVerifyButtonEnabledStatus();
                 textView.SetTextColor(Color.Black);
@@ -405,17 +405,17 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
 
         private void Manage_Persons_Click(object sender, EventArgs e)
         {
-            //Intent intent = new Intent(this, typeof(PersonGroupListActivity));
-            //StartActivity(intent);
+            Intent intent = new Intent(this, typeof(PersonGroupListActivity));
+            StartActivity(intent);
 
-            //if (mFaceId != null && mPersonId != null)
-            //{
-            //    SetVerifyButtonEnabledStatus(true);
-            //}
-            //else
-            //{
-            //    SetVerifyButtonEnabledStatus(false);
-            //}
+            if (mFaceId != null && mPersonId != null)
+            {
+                SetVerifyButtonEnabledStatus(true);
+            }
+            else
+            {
+                SetVerifyButtonEnabledStatus(false);
+            }
         }
 
         private class FaceListAdapter : BaseAdapter
@@ -503,12 +503,12 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
 				personGroupIds = new List<String>();
 				activity = act;
 
-				ICollection<String> personGroups = StorageHelper.GetAllPersonGroupIds(Application.Context);
+				ICollection<String> personGroups = StorageHelper.GetAllPersonGroupIds(activity);
 
 				int index = 0;
 				foreach (String personGroupId in personGroups)
 				{
-                    personIdList.AddRange(StorageHelper.GetAllPersonIds(personGroupId, Application.Context));
+                    personIdList.AddRange(StorageHelper.GetAllPersonIds(personGroupId, activity));
 					for (int i = index; i < personIdList.Count; ++i)
 					{
 						personGroupIds.Add(personGroupId);
@@ -545,8 +545,8 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
 				convertView.Id = position;
 
 				String personName = StorageHelper.GetPersonName(
-				   personIdList[position], personGroupIds[position], Application.Context);
-				String personGroupName = StorageHelper.GetPersonGroupName(personGroupIds[position], Application.Context);
+				   personIdList[position], personGroupIds[position], activity);
+				String personGroupName = StorageHelper.GetPersonGroupName(personGroupIds[position], activity);
 				((TextView)convertView.FindViewById(Resource.Id.text_person_group)).Text = String.Format("{0} - {1}", personGroupName, personName);
 
 				if (position == 0)
