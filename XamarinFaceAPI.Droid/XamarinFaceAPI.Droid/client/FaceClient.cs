@@ -103,5 +103,25 @@ namespace com.rcervantes.xamarinfaceapi_droid.client
                 faceServiceClient.TrainPersonGroup(mPersonGroupId);
 			});
 		}
+
+		public Task DeletePersonFace(string mPersonGroupId, UUID mPersonId, UUID mFaceId)
+		{
+			var faceServiceClient = StartupApp.GetFaceServiceClient();
+
+			return Task.Run(() =>
+			{
+				faceServiceClient.DeletePersonFace(mPersonGroupId, mPersonId, mFaceId);
+			});
+		}
+
+		public Task CreatePerson(string mPersonGroupId, string name, string userData)
+		{
+			var faceServiceClient = StartupApp.GetFaceServiceClient();
+
+			return Task.Run(() =>
+			{
+                faceServiceClient.CreatePerson(mPersonGroupId, name, userData);
+			});
+		}
     }
 }
