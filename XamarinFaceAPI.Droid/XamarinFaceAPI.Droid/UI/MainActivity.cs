@@ -4,6 +4,8 @@ using Android.OS;
 using Android.Views;
 using Android.Content;
 using Android.Support.V7.App;
+using Android;
+using Android.Support.Design.Widget;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
@@ -15,6 +17,8 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
     public class MainActivity : AppCompatActivity
     {
         private Button detection, verification, grouping, findSimilarFace, identification = null;
+        private const int REQUEST_ANDROID_PERMISSIONS = 0;
+        private int permissions_granted = 0;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -28,6 +32,56 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             grouping = FindViewById<Button>(Resource.Id.grouping);
             findSimilarFace = FindViewById<Button>(Resource.Id.findSimilarFace);
             identification = FindViewById<Button>(Resource.Id.identification);
+
+            string camera_permission = Manifest.Permission.Camera;
+            string wstorage_permission = Manifest.Permission.WriteExternalStorage;
+
+            if ((CheckSelfPermission(camera_permission) == Android.Content.PM.Permission.Denied) ||
+                (CheckSelfPermission(wstorage_permission) == Android.Content.PM.Permission.Denied))
+            {
+                Snackbar.Make(FindViewById<LinearLayout>(Resource.Id.layout_main), "Internet and write external storage access are required", Snackbar.LengthIndefinite)
+                        .SetAction("OK", (b) =>
+                        {
+                            RequestPermissions(new[] { camera_permission, wstorage_permission }, REQUEST_ANDROID_PERMISSIONS);
+                        })
+                .Show();
+            }else
+            {
+                permissions_granted = 2;
+                CheckIfEnableButtons();
+            }
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            switch(requestCode)
+            {
+                case (int)REQUEST_ANDROID_PERMISSIONS:
+
+                    foreach(Android.Content.PM.Permission permission in grantResults)
+                    {
+                        if(permission == Android.Content.PM.Permission.Granted)
+                        {
+                            permissions_granted++;
+                        }
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+            CheckIfEnableButtons();
+        }
+
+        private void CheckIfEnableButtons()
+        {
+            detection.Enabled = (permissions_granted == 2) ? true : false;
+			verification.Enabled = (permissions_granted == 2) ? true : false;
+			grouping.Enabled = (permissions_granted == 2) ? true : false;
+			findSimilarFace.Enabled = (permissions_granted == 2) ? true : false;
+			identification.Enabled = (permissions_granted == 2) ? true : false;
         }
 
         protected override void OnResume()
