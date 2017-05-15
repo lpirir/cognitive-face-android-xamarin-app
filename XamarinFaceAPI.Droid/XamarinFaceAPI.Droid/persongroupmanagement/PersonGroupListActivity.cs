@@ -18,7 +18,11 @@ using Java.Util;
 
 namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.PersonGroupListActivity", Label = "@string/person_group_list", ParentActivity = typeof(IdentificationActivity))]
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.PersonGroupListActivity", 
+              Label = "@string/person_group_list", 
+              ParentActivity = typeof(IdentificationActivity),
+			  LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
+			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class PersonGroupListActivity : AppCompatActivity
     {
         private PersonGroupsListAdapter personGroupsListAdapter = null;

@@ -25,7 +25,11 @@ using com.rcervantes.xamarinfaceapi_droid.client;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.FaceVerificationActivity", Label = "@string/face_verification", ParentActivity = typeof(MainActivity))]
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.FaceVerificationActivity", 
+              Label = "@string/face_verification", 
+              ParentActivity = typeof(VerificationMenuActivity),
+			  LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
+			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class FaceVerificationActivity : AppCompatActivity
     {
         private static int REQUEST_SELECT_IMAGE_0 = 0;
@@ -153,38 +157,38 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             ExecuteVerification();
         }
 
-		private async void ExecuteVerification()
-		{
-			VerifyResult verify_result = null;
+        private async void ExecuteVerification()
+        {
+            VerifyResult verify_result = null;
 
-			mProgressDialog.Show();
-			AddLog("Request: Verifying face " + mFaceId0 + " and face " + mFaceId1);
+            mProgressDialog.Show();
+            AddLog("Request: Verifying face " + mFaceId0 + " and face " + mFaceId1);
 
-			try
-			{
-				var faceClient = new FaceClient();
-				mProgressDialog.SetMessage("Verifying...");
-				SetInfo("Verifying...");
-				verify_result = await faceClient.Verify(mFaceId0, mFaceId1);
-			}
-			catch (Java.Lang.Exception e)
-			{
-				AddLog(e.Message);
-			}
+            try
+            {
+                var faceClient = new FaceClient();
+                mProgressDialog.SetMessage("Verifying...");
+                SetInfo("Verifying...");
+                verify_result = await faceClient.Verify(mFaceId0, mFaceId1);
+            }
+            catch (Java.Lang.Exception e)
+            {
+                AddLog(e.Message);
+            }
 
-			RunOnUiThread(() =>
-			{
-				if (verify_result != null)
-				{
-					AddLog("Response: Success. Face " + mFaceId0 + " and face "
-							+ mFaceId1 + (verify_result.IsIdentical ? " " : " don't ")
-							+ "belong to the same person");
-				}
+            RunOnUiThread(() =>
+            {
+                if (verify_result != null)
+                {
+                    AddLog("Response: Success. Face " + mFaceId0 + " and face "
+                            + mFaceId1 + (verify_result.IsIdentical ? " " : " don't ")
+                            + "belong to the same person");
+                }
 
-				// Show the result on screen when verification is done.
-				SetUiAfterVerification(verify_result);
-			});
-		}
+                // Show the result on screen when verification is done.
+                SetUiAfterVerification(verify_result);
+            });
+        }
 
         private void View_Log_Click(object sender, EventArgs e)
         {
@@ -381,7 +385,15 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
 
                         mProgressDialog.SetMessage("Detecting...");
                         SetInfo("Detecting...");
-                        faces = await faceClient.Detect(output);
+                        faces = await faceClient.Detect(output, true, true, new[] {
+                                  FaceServiceClientFaceAttributeType.Age,
+                                  FaceServiceClientFaceAttributeType.Gender,
+                                  FaceServiceClientFaceAttributeType.Smile,
+                                  FaceServiceClientFaceAttributeType.Glasses,
+                                  FaceServiceClientFaceAttributeType.FacialHair,
+                                  FaceServiceClientFaceAttributeType.Emotion,
+                                  FaceServiceClientFaceAttributeType.HeadPose
+                                });
                     }
                 }
             }

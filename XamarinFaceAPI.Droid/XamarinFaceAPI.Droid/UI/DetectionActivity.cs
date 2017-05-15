@@ -25,7 +25,11 @@ using com.rcervantes.xamarinfaceapi_droid.client;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.DetectionActivity", Label = "@string/detection", ParentActivity = typeof(MainActivity))]
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.DetectionActivity", 
+              Label = "@string/detection", 
+              ParentActivity = typeof(MainActivity),
+			  LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
+			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class DetectionActivity : AppCompatActivity
     {
         private const int REQUEST_SELECT_IMAGE = 0;
@@ -150,7 +154,15 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
 
                         mProgressDialog.SetMessage("Detecting...");
                         SetInfo("Detecting...");
-                        faces = await faceClient.Detect(output);
+                        faces = await faceClient.Detect(output, true, true, new[] {
+                                  FaceServiceClientFaceAttributeType.Age,
+                                  FaceServiceClientFaceAttributeType.Gender,
+                                  FaceServiceClientFaceAttributeType.Smile,
+                                  FaceServiceClientFaceAttributeType.Glasses,
+                                  FaceServiceClientFaceAttributeType.FacialHair,
+                                  FaceServiceClientFaceAttributeType.Emotion,
+                                  FaceServiceClientFaceAttributeType.HeadPose
+                                });
                     }
                 }
             }

@@ -25,24 +25,16 @@ namespace com.rcervantes.xamarinfaceapi_droid.client
     {
         public FaceClient() { }
 
-        public Task<Face[]> Detect(MemoryStream stream)
-        {
-            var faceServiceClient = StartupApp.GetFaceServiceClient();
+		public Task<Face[]> Detect(MemoryStream stream, bool returnFaceId, bool returnLandmarks, FaceServiceClientFaceAttributeType[] attributes)
+		{
+			var faceServiceClient = StartupApp.GetFaceServiceClient();
 
-            return Task.Run(() => {
+			return Task.Run(() =>
+			{
+				return faceServiceClient.Detect(stream, true, true, attributes);
 
-				return faceServiceClient.Detect(stream, true, true, new[] {
-									FaceServiceClientFaceAttributeType.Age,
-									FaceServiceClientFaceAttributeType.Gender,
-									FaceServiceClientFaceAttributeType.Smile,
-									FaceServiceClientFaceAttributeType.Glasses,
-									FaceServiceClientFaceAttributeType.FacialHair,
-									FaceServiceClientFaceAttributeType.Emotion,
-									FaceServiceClientFaceAttributeType.HeadPose
-								});
-
-            });
-        }
+			});
+		}
 
 		public Task<VerifyResult> Verify(UUID mFaceId0, UUID mFaceId1)
 		{
@@ -114,13 +106,23 @@ namespace com.rcervantes.xamarinfaceapi_droid.client
 			});
 		}
 
-		public Task CreatePerson(string mPersonGroupId, string name, string userData)
+		public Task<CreatePersonResult> CreatePerson(string mPersonGroupId, string name, string userData)
 		{
 			var faceServiceClient = StartupApp.GetFaceServiceClient();
 
 			return Task.Run(() =>
 			{
-                faceServiceClient.CreatePerson(mPersonGroupId, name, userData);
+                return faceServiceClient.CreatePerson(mPersonGroupId, name, userData);
+			});
+		}
+
+		public Task<AddPersistedFaceResult> AddPersonFace(string mPersonGroupId, UUID mPersonId, Stream mImageStream, string userData, FaceRectangle targetFace)
+		{
+			var faceServiceClient = StartupApp.GetFaceServiceClient();
+
+			return Task.Run(() =>
+			{
+                return faceServiceClient.AddPersonFace(mPersonGroupId, mPersonId, mImageStream, userData, targetFace);
 			});
 		}
     }

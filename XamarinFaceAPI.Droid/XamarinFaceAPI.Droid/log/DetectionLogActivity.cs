@@ -17,7 +17,10 @@ using com.rcervantes.xamarinfaceapi_droid.ui;
 
 namespace com.rcervantes.xamarinfaceapi_droid.log
 {
-	[Activity(Name = "com.rcervantes.xamarinfaceapi_droid.log.DetectionLogActivity", Label = "@string/detection_log", ParentActivity = typeof(DetectionActivity))]
+	[Activity(Name = "com.rcervantes.xamarinfaceapi_droid.log.DetectionLogActivity", 
+              Label = "@string/detection_log", 
+              ParentActivity = typeof(DetectionActivity),
+			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
 	public class DetectionLogActivity : AppCompatActivity
 	{
 		private ListView logListView = null;

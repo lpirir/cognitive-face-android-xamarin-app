@@ -15,10 +15,16 @@ using com.rcervantes.xamarinfaceapi_droid.client;
 using com.rcervantes.xamarinfaceapi_droid.helpers;
 using com.rcervantes.xamarinfaceapi_droid.ui;
 using Java.Util;
+using Xamarin.Cognitive.Face.Android.Contract;
 
 namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.PersonActivity", Label = "@string/person", ParentActivity = typeof(PersonGroupActivity))]
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.PersonActivity", 
+              Label = "@string/person", 
+              ParentActivity = typeof(PersonGroupActivity),
+			  LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
+              WindowSoftInputMode = SoftInput.AdjustNothing,
+			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class PersonActivity : AppCompatActivity
     {
         private bool addNewPerson = false;
@@ -121,11 +127,11 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
 				var faceClient = new FaceClient();
 				mProgressDialog.SetMessage("Syncing with server to add person...");
 				SetInfo("Syncing with server to add person...");
-				await faceClient.CreatePerson(mPersonGroupId, 
+				CreatePersonResult person = await faceClient.CreatePerson(mPersonGroupId, 
                                               Application.Context.GetString(Resource.String.user_provided_person_name), 
                                               Application.Context.GetString(Resource.String.user_provided_description_data));
 
-				result = mPersonGroupId;
+                result = person.PersonId.ToString();
 			}
 			catch (Java.Lang.Exception e)
 			{

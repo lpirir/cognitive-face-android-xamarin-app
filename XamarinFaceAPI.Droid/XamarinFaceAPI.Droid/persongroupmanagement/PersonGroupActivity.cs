@@ -19,7 +19,12 @@ using Java.Util;
 
 namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.PersonGroupActivity", Label = "@string/person_group", ParentActivity = typeof(PersonGroupListActivity))]
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.PersonGroupActivity", 
+              Label = "@string/person_group", 
+              ParentActivity = typeof(PersonGroupListActivity), 
+              LaunchMode = Android.Content.PM.LaunchMode.SingleTop, 
+              WindowSoftInputMode = SoftInput.AdjustNothing, 
+              ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class PersonGroupActivity : AppCompatActivity
     {
         private bool addNewPersonGroup, personGroupExists = false;
@@ -457,9 +462,6 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
                         Android.Net.Uri uri = Android.Net.Uri.Parse(StorageHelper.GetFaceUri(str, activity));
                         ((ImageView)convertView.FindViewById(Resource.Id.image_person)).SetImageURI(uri);
                     }
-                    //IEnumerator<String> it = faceIdSet.GetEnumerator();
-                    //Uri uri = Uri.Parse(StorageHelper.GetFaceUri(it.MoveNext(), activity));
-                    //((ImageView)convertView.FindViewById(Resource.Id.image_person)).setImageURI(uri);
                 }
                 else
                 {

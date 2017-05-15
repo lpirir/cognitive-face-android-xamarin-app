@@ -20,11 +20,16 @@ using com.rcervantes.xamarinfaceapi_droid.persongroupmanagement;
 using Java.IO;
 using Java.Text;
 using Java.Util;
+using Xamarin.Cognitive.Face.Android;
 using Xamarin.Cognitive.Face.Android.Contract;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.PersonVerificationActivity", Label = "@string/person_verification", ParentActivity = typeof(MainActivity))]
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.PersonVerificationActivity", 
+              Label = "@string/person_verification", 
+              ParentActivity = typeof(VerificationMenuActivity),
+			  LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
+			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class PersonVerificationActivity : AppCompatActivity
     {
         private static int REQUEST_SELECT_IMAGE = 0;
@@ -89,7 +94,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             listView_persons.ItemClick -= ListView_Persons_ItemClick;
             listView_faces_0.ItemClick -= ListView_Faces_0_ItemClick;
             select_image_0.Click -= Select_Image_0_Click;
-			manage_persons.Click -= Manage_Persons_Click;
+            manage_persons.Click -= Manage_Persons_Click;
             verify.Click -= Verify_Click;
             view_log.Click -= View_Log_Click;
         }
@@ -190,41 +195,41 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             ExecuteVerification();
         }
 
-		private async void ExecuteVerification()
-		{
-			VerifyResult verify_result = null;
+        private async void ExecuteVerification()
+        {
+            VerifyResult verify_result = null;
 
-			mProgressDialog.Show();
-			AddLog("Request: Verifying face " + mFaceId + " and person " + mPersonId);
+            mProgressDialog.Show();
+            AddLog("Request: Verifying face " + mFaceId + " and person " + mPersonId);
 
-			try
-			{
-				var faceClient = new FaceClient();
-				mProgressDialog.SetMessage("Verifying...");
-				SetInfo("Verifying...");
+            try
+            {
+                var faceClient = new FaceClient();
+                mProgressDialog.SetMessage("Verifying...");
+                SetInfo("Verifying...");
                 verify_result = await faceClient.Verify(mFaceId, mPersonGroupId, mPersonId);
-			}
-			catch (Java.Lang.Exception e)
-			{
-				AddLog(e.Message);
-			}
+            }
+            catch (Java.Lang.Exception e)
+            {
+                AddLog(e.Message);
+            }
 
-			RunOnUiThread(() =>
-			{
-				if (verify_result != null)
-				{
-					AddLog("Response: Success. Face " + mFaceId + " "
-							+ mPersonId + (verify_result.IsIdentical ? " " : " don't ")
-							+ "belong to person " + mPersonId);
-				}
+            RunOnUiThread(() =>
+            {
+                if (verify_result != null)
+                {
+                    AddLog("Response: Success. Face " + mFaceId + " "
+                            + mPersonId + (verify_result.IsIdentical ? " " : " don't ")
+                            + "belong to person " + mPersonId);
+                }
 
-				// Show the result on screen when verification is done.
-				SetUiAfterVerification(verify_result);
-			});
-		}
+                // Show the result on screen when verification is done.
+                SetUiAfterVerification(verify_result);
+            });
+        }
 
 
-		private void View_Log_Click(object sender, EventArgs e)
+        private void View_Log_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(VerificationLogActivity));
             StartActivity(intent);
@@ -352,44 +357,52 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             SetSelectImageButtonEnabledStatus(false);
         }
 
-		private async void ExecuteDetection()
-		{
-			Face[] faces = null;
-			bool mSucceed = true;
+        private async void ExecuteDetection()
+        {
+            Face[] faces = null;
+            bool mSucceed = true;
 
-			mProgressDialog.Show();
-			AddLog("Request: Detecting in image");
+            mProgressDialog.Show();
+            AddLog("Request: Detecting in image");
 
-			try
-			{
-				var faceClient = new FaceClient();
-				using (MemoryStream pre_output = new MemoryStream())
-				{
-					mBitmap.Compress(Bitmap.CompressFormat.Jpeg, 100, pre_output);
+            try
+            {
+                var faceClient = new FaceClient();
+                using (MemoryStream pre_output = new MemoryStream())
+                {
+                    mBitmap.Compress(Bitmap.CompressFormat.Jpeg, 100, pre_output);
 
-					using (ByteArrayInputStream inputStream = new ByteArrayInputStream(pre_output.ToArray()))
-					{
-						byte[] arr = new byte[inputStream.Available()];
-						inputStream.Read(arr);
-						var output = new MemoryStream(arr);
+                    using (ByteArrayInputStream inputStream = new ByteArrayInputStream(pre_output.ToArray()))
+                    {
+                        byte[] arr = new byte[inputStream.Available()];
+                        inputStream.Read(arr);
+                        var output = new MemoryStream(arr);
 
-						mProgressDialog.SetMessage("Detecting...");
-						SetInfo("Detecting...");
-						faces = await faceClient.Detect(output);
-					}
-				}
-			}
-			catch (Java.Lang.Exception e)
-			{
-				mSucceed = false;
-				AddLog(e.Message);
-			}
+                        mProgressDialog.SetMessage("Detecting...");
+                        SetInfo("Detecting...");
+                        faces = await faceClient.Detect(output, true, true, new[] {
+                                  FaceServiceClientFaceAttributeType.Age,
+                                  FaceServiceClientFaceAttributeType.Gender,
+                                  FaceServiceClientFaceAttributeType.Smile,
+                                  FaceServiceClientFaceAttributeType.Glasses,
+                                  FaceServiceClientFaceAttributeType.FacialHair,
+                                  FaceServiceClientFaceAttributeType.Emotion,
+                                  FaceServiceClientFaceAttributeType.HeadPose
+                                });
+                    }
+                }
+            }
+            catch (Java.Lang.Exception e)
+            {
+                mSucceed = false;
+                AddLog(e.Message);
+            }
 
-			RunOnUiThread(() =>
-			{
-				SetUiAfterDetection(faces, mSucceed);
-			});
-		}
+            RunOnUiThread(() =>
+            {
+                SetUiAfterDetection(faces, mSucceed);
+            });
+        }
 
         private void SetInfo(String info)
         {
@@ -491,71 +504,71 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             }
         }
 
-		private class PersonListAdapter : BaseAdapter
-		{
-			public List<String> personIdList;
-			public List<String> personGroupIds;
-			private PersonVerificationActivity activity;
+        private class PersonListAdapter : BaseAdapter
+        {
+            public List<String> personIdList;
+            public List<String> personGroupIds;
+            private PersonVerificationActivity activity;
 
-			public PersonListAdapter(PersonVerificationActivity act)
-			{
-				personIdList = new List<String>();
-				personGroupIds = new List<String>();
-				activity = act;
+            public PersonListAdapter(PersonVerificationActivity act)
+            {
+                personIdList = new List<String>();
+                personGroupIds = new List<String>();
+                activity = act;
 
-				ICollection<String> personGroups = StorageHelper.GetAllPersonGroupIds(activity);
+                ICollection<String> personGroups = StorageHelper.GetAllPersonGroupIds(activity);
 
-				int index = 0;
-				foreach (String personGroupId in personGroups)
-				{
+                int index = 0;
+                foreach (String personGroupId in personGroups)
+                {
                     personIdList.AddRange(StorageHelper.GetAllPersonIds(personGroupId, activity));
-					for (int i = index; i < personIdList.Count; ++i)
-					{
-						personGroupIds.Add(personGroupId);
-					}
-					index = personIdList.Count;
-				}
-			}
+                    for (int i = index; i < personIdList.Count; ++i)
+                    {
+                        personGroupIds.Add(personGroupId);
+                    }
+                    index = personIdList.Count;
+                }
+            }
 
-			public override int Count
-			{
-				get
-				{
-					return personIdList.Count;
-				}
-			}
+            public override int Count
+            {
+                get
+                {
+                    return personIdList.Count;
+                }
+            }
 
-			public override Java.Lang.Object GetItem(int position)
-			{
-				return new String[] { personIdList[position], personGroupIds[position] };
-			}
+            public override Java.Lang.Object GetItem(int position)
+            {
+                return new String[] { personIdList[position], personGroupIds[position] };
+            }
 
-			public override long GetItemId(int position)
-			{
-				return position;
-			}
+            public override long GetItemId(int position)
+            {
+                return position;
+            }
 
-			public override View GetView(int position, View convertView, ViewGroup parent)
-			{
-				if (convertView == null)
-				{
-					LayoutInflater layoutInflater = (LayoutInflater)Application.Context.GetSystemService(Context.LayoutInflaterService);
-					convertView = layoutInflater.Inflate(Resource.Layout.item_person_group, parent, false);
-				}
-				convertView.Id = position;
+            public override View GetView(int position, View convertView, ViewGroup parent)
+            {
+                if (convertView == null)
+                {
+                    LayoutInflater layoutInflater = (LayoutInflater)Application.Context.GetSystemService(Context.LayoutInflaterService);
+                    convertView = layoutInflater.Inflate(Resource.Layout.item_person_group, parent, false);
+                }
+                convertView.Id = position;
 
-				String personName = StorageHelper.GetPersonName(
-				   personIdList[position], personGroupIds[position], activity);
-				String personGroupName = StorageHelper.GetPersonGroupName(personGroupIds[position], activity);
-				((TextView)convertView.FindViewById(Resource.Id.text_person_group)).Text = String.Format("{0} - {1}", personGroupName, personName);
+                String personName = StorageHelper.GetPersonName(
+                   personIdList[position], personGroupIds[position], activity);
+                String personGroupName = StorageHelper.GetPersonGroupName(personGroupIds[position], activity);
+                ((TextView)convertView.FindViewById(Resource.Id.text_person_group)).Text = String.Format("{0} - {1}", personGroupName, personName);
 
-				if (position == 0)
-				{
+                if (position == 0)
+                {
                     ((TextView)convertView.FindViewById(Resource.Id.text_person_group)).SetTextColor(Color.ParseColor("#3399FF"));
-				}
+                }
 
-				return convertView;
-			}
-		}
+                return convertView;
+            }
+        }
     }
 }

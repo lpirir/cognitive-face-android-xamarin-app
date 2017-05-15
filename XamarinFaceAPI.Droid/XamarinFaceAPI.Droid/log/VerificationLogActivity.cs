@@ -17,7 +17,10 @@ using com.rcervantes.xamarinfaceapi_droid.ui;
 
 namespace com.rcervantes.xamarinfaceapi_droid.log
 {
-	[Activity(Name = "com.rcervantes.xamarinfaceapi_droid.log.VerificationLogActivity", Label = "@string/verification_log", ParentActivity = typeof(FaceVerificationActivity))]
+	[Activity(Name = "com.rcervantes.xamarinfaceapi_droid.log.VerificationLogActivity", 
+              Label = "@string/verification_log", 
+              ParentActivity = typeof(FaceVerificationActivity),
+			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
 	public class VerificationLogActivity : AppCompatActivity
 	{
 		private ListView logListView = null;

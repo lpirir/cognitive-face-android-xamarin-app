@@ -9,7 +9,9 @@ using Java.IO;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.SelectImageActivity", Label = "@string/select_an_image")]
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.SelectImageActivity", 
+              Label = "@string/select_an_image",
+			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class SelectImageActivity : AppCompatActivity
     {
         private const int REQUEST_TAKE_PHOTO = 0;
