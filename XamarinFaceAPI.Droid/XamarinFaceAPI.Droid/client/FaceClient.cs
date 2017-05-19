@@ -125,5 +125,15 @@ namespace com.rcervantes.xamarinfaceapi_droid.client
                 return faceServiceClient.AddPersonFace(mPersonGroupId, mPersonId, mImageStream, userData, targetFace);
 			});
 		}
+
+		public Task<GroupResult> Group(UUID[] faceIds)
+		{
+			var faceServiceClient = StartupApp.GetFaceServiceClient();
+
+			return Task.Run(() =>
+			{
+				return faceServiceClient.Group(faceIds);
+			});
+		}
     }
 }

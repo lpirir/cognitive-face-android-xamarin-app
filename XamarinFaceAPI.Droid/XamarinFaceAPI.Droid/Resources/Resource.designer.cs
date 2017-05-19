@@ -2186,8 +2186,8 @@ namespace com.rcervantes.xamarinfaceapi_droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0800d2
-			public const int action0 = 2131230930;
+			// aapt resource value: 0x7f0800d4
+			public const int action0 = 2131230932;
 			
 			// aapt resource value: 0x7f080064
 			public const int action_bar = 2131230820;
@@ -2210,17 +2210,17 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f080041
 			public const int action_bar_title = 2131230785;
 			
-			// aapt resource value: 0x7f0800cf
-			public const int action_container = 2131230927;
+			// aapt resource value: 0x7f0800d1
+			public const int action_container = 2131230929;
 			
 			// aapt resource value: 0x7f080065
 			public const int action_context_bar = 2131230821;
 			
-			// aapt resource value: 0x7f0800d6
-			public const int action_divider = 2131230934;
+			// aapt resource value: 0x7f0800d8
+			public const int action_divider = 2131230936;
 			
-			// aapt resource value: 0x7f0800d0
-			public const int action_image = 2131230928;
+			// aapt resource value: 0x7f0800d2
+			public const int action_image = 2131230930;
 			
 			// aapt resource value: 0x7f080003
 			public const int action_menu_divider = 2131230723;
@@ -2237,11 +2237,11 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f080043
 			public const int action_mode_close_button = 2131230787;
 			
-			// aapt resource value: 0x7f0800d1
-			public const int action_text = 2131230929;
+			// aapt resource value: 0x7f0800d3
+			public const int action_text = 2131230931;
 			
-			// aapt resource value: 0x7f0800de
-			public const int actions = 2131230942;
+			// aapt resource value: 0x7f0800e0
+			public const int actions = 2131230944;
 			
 			// aapt resource value: 0x7f080044
 			public const int activity_chooser_view_content = 2131230788;
@@ -2297,8 +2297,8 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f0800a4
 			public const int button_take_a_photo = 2131230884;
 			
-			// aapt resource value: 0x7f0800d3
-			public const int cancel_action = 2131230931;
+			// aapt resource value: 0x7f0800d5
+			public const int cancel_action = 2131230933;
 			
 			// aapt resource value: 0x7f080030
 			public const int center = 2131230768;
@@ -2312,17 +2312,17 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f08005b
 			public const int checkbox = 2131230811;
 			
-			// aapt resource value: 0x7f0800c3
-			public const int checkbox_face = 2131230915;
+			// aapt resource value: 0x7f0800c5
+			public const int checkbox_face = 2131230917;
 			
-			// aapt resource value: 0x7f0800ca
-			public const int checkbox_person = 2131230922;
+			// aapt resource value: 0x7f0800cc
+			public const int checkbox_person = 2131230924;
 			
-			// aapt resource value: 0x7f0800ce
-			public const int checkbox_person_group = 2131230926;
+			// aapt resource value: 0x7f0800d0
+			public const int checkbox_person_group = 2131230928;
 			
-			// aapt resource value: 0x7f0800db
-			public const int chronometer = 2131230939;
+			// aapt resource value: 0x7f0800dd
+			public const int chronometer = 2131230941;
 			
 			// aapt resource value: 0x7f080039
 			public const int clip_horizontal = 2131230777;
@@ -2387,8 +2387,8 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f080021
 			public const int end = 2131230753;
 			
-			// aapt resource value: 0x7f0800e4
-			public const int end_padder = 2131230948;
+			// aapt resource value: 0x7f0800e6
+			public const int end_padder = 2131230950;
 			
 			// aapt resource value: 0x7f08002a
 			public const int enterAlways = 2131230762;
@@ -2405,8 +2405,14 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f08005a
 			public const int expanded_menu = 2131230810;
 			
-			// aapt resource value: 0x7f0800c4
-			public const int face_thumbnail = 2131230916;
+			// aapt resource value: 0x7f0800c2
+			public const int face_group_name = 2131230914;
+			
+			// aapt resource value: 0x7f0800c6
+			public const int face_thumbnail = 2131230918;
+			
+			// aapt resource value: 0x7f0800c3
+			public const int faces = 2131230915;
 			
 			// aapt resource value: 0x7f080084
 			public const int facial_similar_faces = 2131230852;
@@ -2456,8 +2462,8 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f080049
 			public const int icon = 2131230793;
 			
-			// aapt resource value: 0x7f0800df
-			public const int icon_group = 2131230943;
+			// aapt resource value: 0x7f0800e1
+			public const int icon_group = 2131230945;
 			
 			// aapt resource value: 0x7f080094
 			public const int identification = 2131230868;
@@ -2489,26 +2495,26 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f0800c1
 			public const int image_face = 2131230913;
 			
-			// aapt resource value: 0x7f0800c8
-			public const int image_person = 2131230920;
+			// aapt resource value: 0x7f0800ca
+			public const int image_person = 2131230922;
 			
 			// aapt resource value: 0x7f080075
 			public const int info = 2131230837;
 			
-			// aapt resource value: 0x7f0800c2
-			public const int item_face = 2131230914;
+			// aapt resource value: 0x7f0800c4
+			public const int item_face = 2131230916;
 			
-			// aapt resource value: 0x7f0800c6
-			public const int item_log = 2131230918;
+			// aapt resource value: 0x7f0800c8
+			public const int item_log = 2131230920;
 			
-			// aapt resource value: 0x7f0800c7
-			public const int item_person = 2131230919;
+			// aapt resource value: 0x7f0800c9
+			public const int item_person = 2131230921;
+			
+			// aapt resource value: 0x7f0800cf
+			public const int item_person_group = 2131230927;
 			
 			// aapt resource value: 0x7f0800cd
-			public const int item_person_group = 2131230925;
-			
-			// aapt resource value: 0x7f0800cb
-			public const int item_person_group_identify = 2131230923;
+			public const int item_person_group_identify = 2131230925;
 			
 			// aapt resource value: 0x7f080000
 			public const int item_touch_helper_previous_elevation = 2131230720;
@@ -2522,11 +2528,11 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f080034
 			public const int left = 2131230772;
 			
-			// aapt resource value: 0x7f0800e0
-			public const int line1 = 2131230944;
-			
 			// aapt resource value: 0x7f0800e2
-			public const int line3 = 2131230946;
+			public const int line1 = 2131230946;
+			
+			// aapt resource value: 0x7f0800e4
+			public const int line3 = 2131230948;
 			
 			// aapt resource value: 0x7f08000f
 			public const int listMode = 2131230735;
@@ -2567,14 +2573,14 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f0800b3
 			public const int manage_persons = 2131230899;
 			
-			// aapt resource value: 0x7f0800e6
-			public const int masked = 2131230950;
+			// aapt resource value: 0x7f0800e8
+			public const int masked = 2131230952;
 			
-			// aapt resource value: 0x7f0800d5
-			public const int media_actions = 2131230933;
+			// aapt resource value: 0x7f0800d7
+			public const int media_actions = 2131230935;
 			
-			// aapt resource value: 0x7f0800e7
-			public const int menu_delete_items = 2131230951;
+			// aapt resource value: 0x7f0800e9
+			public const int menu_delete_items = 2131230953;
 			
 			// aapt resource value: 0x7f080022
 			public const int middle = 2131230754;
@@ -2597,14 +2603,14 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f080010
 			public const int normal = 2131230736;
 			
-			// aapt resource value: 0x7f0800dd
-			public const int notification_background = 2131230941;
+			// aapt resource value: 0x7f0800df
+			public const int notification_background = 2131230943;
 			
-			// aapt resource value: 0x7f0800d8
-			public const int notification_main_column = 2131230936;
+			// aapt resource value: 0x7f0800da
+			public const int notification_main_column = 2131230938;
 			
-			// aapt resource value: 0x7f0800d7
-			public const int notification_main_column_container = 2131230935;
+			// aapt resource value: 0x7f0800d9
+			public const int notification_main_column_container = 2131230937;
 			
 			// aapt resource value: 0x7f080037
 			public const int parallax = 2131230775;
@@ -2657,11 +2663,11 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f080035
 			public const int right = 2131230773;
 			
-			// aapt resource value: 0x7f0800dc
-			public const int right_icon = 2131230940;
+			// aapt resource value: 0x7f0800de
+			public const int right_icon = 2131230942;
 			
-			// aapt resource value: 0x7f0800d9
-			public const int right_side = 2131230937;
+			// aapt resource value: 0x7f0800db
+			public const int right_side = 2131230939;
 			
 			// aapt resource value: 0x7f08001b
 			public const int screen = 2131230747;
@@ -2774,8 +2780,8 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f080036
 			public const int start = 2131230774;
 			
-			// aapt resource value: 0x7f0800d4
-			public const int status_bar_latest_event_content = 2131230932;
+			// aapt resource value: 0x7f0800d6
+			public const int status_bar_latest_event_content = 2131230934;
 			
 			// aapt resource value: 0x7f08005e
 			public const int submenuarrow = 2131230814;
@@ -2786,11 +2792,11 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f080011
 			public const int tabMode = 2131230737;
 			
-			// aapt resource value: 0x7f0800e3
-			public const int text = 2131230947;
+			// aapt resource value: 0x7f0800e5
+			public const int text = 2131230949;
 			
-			// aapt resource value: 0x7f0800e1
-			public const int text2 = 2131230945;
+			// aapt resource value: 0x7f0800e3
+			public const int text2 = 2131230947;
 			
 			// aapt resource value: 0x7f080052
 			public const int textSpacerNoButtons = 2131230802;
@@ -2801,17 +2807,17 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f08007f
 			public const int text_all_faces = 2131230847;
 			
-			// aapt resource value: 0x7f0800c5
-			public const int text_detected_face = 2131230917;
+			// aapt resource value: 0x7f0800c7
+			public const int text_detected_face = 2131230919;
 			
 			// aapt resource value: 0x7f0800c0
 			public const int text_input_password_toggle = 2131230912;
 			
-			// aapt resource value: 0x7f0800c9
-			public const int text_person = 2131230921;
+			// aapt resource value: 0x7f0800cb
+			public const int text_person = 2131230923;
 			
-			// aapt resource value: 0x7f0800cc
-			public const int text_person_group = 2131230924;
+			// aapt resource value: 0x7f0800ce
+			public const int text_person_group = 2131230926;
 			
 			// aapt resource value: 0x7f080089
 			public const int text_person_group_selected = 2131230857;
@@ -2828,8 +2834,8 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f08000d
 			public const int textinput_error = 2131230733;
 			
-			// aapt resource value: 0x7f0800da
-			public const int time = 2131230938;
+			// aapt resource value: 0x7f0800dc
+			public const int time = 2131230940;
 			
 			// aapt resource value: 0x7f08004a
 			public const int title = 2131230794;
@@ -2873,8 +2879,8 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			// aapt resource value: 0x7f08000e
 			public const int view_offset_helper = 2131230734;
 			
-			// aapt resource value: 0x7f0800e5
-			public const int visible = 2131230949;
+			// aapt resource value: 0x7f0800e7
+			public const int visible = 2131230951;
 			
 			// aapt resource value: 0x7f080027
 			public const int withText = 2131230759;
@@ -3107,79 +3113,82 @@ namespace com.rcervantes.xamarinfaceapi_droid
 			public const int item_face = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int item_face_with_checkbox = 2130968633;
+			public const int item_face_group = 2130968633;
 			
 			// aapt resource value: 0x7f04003a
-			public const int item_face_with_description = 2130968634;
+			public const int item_face_with_checkbox = 2130968634;
 			
 			// aapt resource value: 0x7f04003b
-			public const int item_log = 2130968635;
+			public const int item_face_with_description = 2130968635;
 			
 			// aapt resource value: 0x7f04003c
-			public const int item_person = 2130968636;
+			public const int item_log = 2130968636;
 			
 			// aapt resource value: 0x7f04003d
-			public const int item_person_group = 2130968637;
+			public const int item_person = 2130968637;
 			
 			// aapt resource value: 0x7f04003e
-			public const int item_person_group_with_checkbox = 2130968638;
+			public const int item_person_group = 2130968638;
 			
 			// aapt resource value: 0x7f04003f
-			public const int notification_action = 2130968639;
+			public const int item_person_group_with_checkbox = 2130968639;
 			
 			// aapt resource value: 0x7f040040
-			public const int notification_action_tombstone = 2130968640;
+			public const int notification_action = 2130968640;
 			
 			// aapt resource value: 0x7f040041
-			public const int notification_media_action = 2130968641;
+			public const int notification_action_tombstone = 2130968641;
 			
 			// aapt resource value: 0x7f040042
-			public const int notification_media_cancel_action = 2130968642;
+			public const int notification_media_action = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int notification_template_big_media = 2130968643;
+			public const int notification_media_cancel_action = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int notification_template_big_media_custom = 2130968644;
+			public const int notification_template_big_media = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int notification_template_big_media_narrow = 2130968645;
+			public const int notification_template_big_media_custom = 2130968645;
 			
 			// aapt resource value: 0x7f040046
-			public const int notification_template_big_media_narrow_custom = 2130968646;
+			public const int notification_template_big_media_narrow = 2130968646;
 			
 			// aapt resource value: 0x7f040047
-			public const int notification_template_custom_big = 2130968647;
+			public const int notification_template_big_media_narrow_custom = 2130968647;
 			
 			// aapt resource value: 0x7f040048
-			public const int notification_template_icon_group = 2130968648;
+			public const int notification_template_custom_big = 2130968648;
 			
 			// aapt resource value: 0x7f040049
-			public const int notification_template_lines_media = 2130968649;
+			public const int notification_template_icon_group = 2130968649;
 			
 			// aapt resource value: 0x7f04004a
-			public const int notification_template_media = 2130968650;
+			public const int notification_template_lines_media = 2130968650;
 			
 			// aapt resource value: 0x7f04004b
-			public const int notification_template_media_custom = 2130968651;
+			public const int notification_template_media = 2130968651;
 			
 			// aapt resource value: 0x7f04004c
-			public const int notification_template_part_chronometer = 2130968652;
+			public const int notification_template_media_custom = 2130968652;
 			
 			// aapt resource value: 0x7f04004d
-			public const int notification_template_part_time = 2130968653;
+			public const int notification_template_part_chronometer = 2130968653;
 			
 			// aapt resource value: 0x7f04004e
-			public const int select_dialog_item_material = 2130968654;
+			public const int notification_template_part_time = 2130968654;
 			
 			// aapt resource value: 0x7f04004f
-			public const int select_dialog_multichoice_material = 2130968655;
+			public const int select_dialog_item_material = 2130968655;
 			
 			// aapt resource value: 0x7f040050
-			public const int select_dialog_singlechoice_material = 2130968656;
+			public const int select_dialog_multichoice_material = 2130968656;
 			
 			// aapt resource value: 0x7f040051
-			public const int support_simple_spinner_dropdown_item = 2130968657;
+			public const int select_dialog_singlechoice_material = 2130968657;
+			
+			// aapt resource value: 0x7f040052
+			public const int support_simple_spinner_dropdown_item = 2130968658;
 			
 			static Layout()
 			{

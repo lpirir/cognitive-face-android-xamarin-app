@@ -117,6 +117,8 @@
     <Compile Include="persongroupmanagement\PersonGroupActivity.cs" />
     <Compile Include="persongroupmanagement\PersonActivity.cs" />
     <Compile Include="persongroupmanagement\AddFaceToPersonActivity.cs" />
+    <Compile Include="log\GroupingLogActivity.cs" />
+    <Compile Include="helpers\EmbeddedGridView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -159,6 +161,7 @@
     <AndroidResource Include="Resources\layout\item_person.axml" />
     <AndroidResource Include="Resources\layout\item_face_with_checkbox.axml" />
     <AndroidResource Include="Resources\layout\activity_add_face_to_person.axml" />
+    <AndroidResource Include="Resources\layout\item_face_group.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\mipmap-hdpi\" />
