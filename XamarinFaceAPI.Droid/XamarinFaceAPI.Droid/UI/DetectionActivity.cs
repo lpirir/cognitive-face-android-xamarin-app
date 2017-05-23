@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,11 +24,11 @@ using com.rcervantes.xamarinfaceapi_droid.client;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.DetectionActivity", 
-              Label = "@string/detection", 
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.DetectionActivity",
+              Label = "@string/detection",
               ParentActivity = typeof(MainActivity),
-			  LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
-			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+              LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
+              ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class DetectionActivity : AppCompatActivity
     {
         private const int REQUEST_SELECT_IMAGE = 0;
@@ -114,6 +113,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
                         SetDetectButtonEnabledStatus(true);
                     }
                     break;
+
                 default:
                     break;
             }
@@ -377,7 +377,6 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             {
                 return string.Format("Pitch: {0}, Roll: {1}, Yaw: {2}", headPose.Pitch, headPose.Roll, headPose.Yaw);
             }
-
         }
     }
 }

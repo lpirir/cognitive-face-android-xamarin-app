@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,11 +24,11 @@ using com.rcervantes.xamarinfaceapi_droid.client;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.FaceVerificationActivity", 
-              Label = "@string/face_verification", 
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.FaceVerificationActivity",
+              Label = "@string/face_verification",
               ParentActivity = typeof(VerificationMenuActivity),
-			  LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
-			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+              LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
+              ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class FaceVerificationActivity : AppCompatActivity
     {
         private static int REQUEST_SELECT_IMAGE_0 = 0;
@@ -248,7 +247,6 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
 
             listView.ItemClick += (sender, e) =>
             {
-
                 FaceListAdapter faceListAdapter = index == 0 ? mFaceListAdapter0 : mFaceListAdapter1;
 
                 if (!faceListAdapter.faces[e.Position].FaceId.Equals(
@@ -344,7 +342,6 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
 
             if (mFaceId0 != null && mFaceId1 != null)
             {
-
                 SetVerifyButtonEnabledStatus(true);
             }
         }

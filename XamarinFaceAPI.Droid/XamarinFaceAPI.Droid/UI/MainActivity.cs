@@ -45,7 +45,8 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
                             RequestPermissions(new[] { camera_permission, wstorage_permission }, REQUEST_ANDROID_PERMISSIONS);
                         })
                 .Show();
-            }else
+            }
+            else
             {
                 permissions_granted = 2;
                 CheckIfEnableButtons();
@@ -56,19 +57,20 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
         {
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            switch(requestCode)
+            switch (requestCode)
             {
                 case (int)REQUEST_ANDROID_PERMISSIONS:
 
-                    foreach(Android.Content.PM.Permission permission in grantResults)
+                    foreach (Android.Content.PM.Permission permission in grantResults)
                     {
-                        if(permission == Android.Content.PM.Permission.Granted)
+                        if (permission == Android.Content.PM.Permission.Granted)
                         {
                             permissions_granted++;
                         }
                     }
 
                     break;
+
                 default:
                     break;
             }
@@ -78,10 +80,10 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
         private void CheckIfEnableButtons()
         {
             detection.Enabled = (permissions_granted == 2) ? true : false;
-			verification.Enabled = (permissions_granted == 2) ? true : false;
-			grouping.Enabled = (permissions_granted == 2) ? true : false;
-			findSimilarFace.Enabled = (permissions_granted == 2) ? true : false;
-			identification.Enabled = (permissions_granted == 2) ? true : false;
+            verification.Enabled = (permissions_granted == 2) ? true : false;
+            grouping.Enabled = (permissions_granted == 2) ? true : false;
+            findSimilarFace.Enabled = (permissions_granted == 2) ? true : false;
+            identification.Enabled = (permissions_granted == 2) ? true : false;
         }
 
         protected override void OnResume()
@@ -135,4 +137,3 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
         }
     }
 }
-

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,10 +20,10 @@ using Xamarin.Cognitive.Face.Android.Contract;
 
 namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.AddFaceToPersonActivity", 
-              Label = "@string/add_face_to_person", 
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.AddFaceToPersonActivity",
+              Label = "@string/add_face_to_person",
               ParentActivity = typeof(PersonActivity),
-			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+              ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class AddFaceToPersonActivity : AppCompatActivity
     {
         private String mPersonGroupId, mPersonId, mImageUriStr = null;
@@ -239,13 +238,13 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
                         try
                         {
                             var file = System.IO.Path.Combine(Application.Context.FilesDir.Path, faceId);
-							using (var fs = new FileStream(file, FileMode.OpenOrCreate))
-							{
-								mFaceGridViewAdapter.faceThumbnails[index].Compress(Bitmap.CompressFormat.Jpeg, 100, fs);
-							}
+                            using (var fs = new FileStream(file, FileMode.OpenOrCreate))
+                            {
+                                mFaceGridViewAdapter.faceThumbnails[index].Compress(Bitmap.CompressFormat.Jpeg, 100, fs);
+                            }
 
                             Android.Net.Uri uri = Android.Net.Uri.Parse(file);
-							StorageHelper.SetFaceUri(faceId, uri.ToString(), mPersonId, this);
+                            StorageHelper.SetFaceUri(faceId, uri.ToString(), mPersonId, this);
                         }
                         catch (Java.IO.IOException e)
                         {
@@ -257,7 +256,6 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
                 }
             });
         }
-
 
         private void AddLog(String _log)
         {
@@ -339,28 +337,27 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
 
                 CheckBox checkBox = (CheckBox)convertView.FindViewById(Resource.Id.checkbox_face);
                 checkBox.Checked = faceChecked[position];
-				checkBox.SetOnCheckedChangeListener(new SetOnCheckedChangeListener(this, position));
+                checkBox.SetOnCheckedChangeListener(new SetOnCheckedChangeListener(this, position));
 
                 return convertView;
             }
-
         }
 
-		private class SetOnCheckedChangeListener : Java.Lang.Object, CompoundButton.IOnCheckedChangeListener
-		{
-			private FaceGridViewAdapter adapter;
-			private int position;
+        private class SetOnCheckedChangeListener : Java.Lang.Object, CompoundButton.IOnCheckedChangeListener
+        {
+            private FaceGridViewAdapter adapter;
+            private int position;
 
-			public SetOnCheckedChangeListener(FaceGridViewAdapter adap, int pos)
-			{
-				this.adapter = adap;
-				this.position = pos;
-			}
+            public SetOnCheckedChangeListener(FaceGridViewAdapter adap, int pos)
+            {
+                this.adapter = adap;
+                this.position = pos;
+            }
 
-			public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
-			{
-				adapter.faceChecked[position] = isChecked;
-			}
-		}
+            public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
+            {
+                adapter.faceChecked[position] = isChecked;
+            }
+        }
     }
 }

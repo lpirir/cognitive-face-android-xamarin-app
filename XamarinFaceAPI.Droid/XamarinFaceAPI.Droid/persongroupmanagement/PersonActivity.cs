@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,12 +18,12 @@ using Xamarin.Cognitive.Face.Android.Contract;
 
 namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.PersonActivity", 
-              Label = "@string/person", 
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.PersonActivity",
+              Label = "@string/person",
               ParentActivity = typeof(PersonGroupActivity),
-			  LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
+              LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
               WindowSoftInputMode = SoftInput.AdjustNothing,
-			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+              ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class PersonActivity : AppCompatActivity
     {
         private bool addNewPerson = false;
@@ -115,51 +114,51 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
             }
         }
 
-		private async void ExecuteAddPerson(bool mAddFace, string mPersonGroupId)
-		{
-			string result = string.Empty;
+        private async void ExecuteAddPerson(bool mAddFace, string mPersonGroupId)
+        {
+            string result = string.Empty;
 
-			mProgressDialog.Show();
-			AddLog("Request: Creating Person in person group" + mPersonGroupId);
+            mProgressDialog.Show();
+            AddLog("Request: Creating Person in person group" + mPersonGroupId);
 
-			try
-			{
-				var faceClient = new FaceClient();
-				mProgressDialog.SetMessage("Syncing with server to add person...");
-				SetInfo("Syncing with server to add person...");
-				CreatePersonResult person = await faceClient.CreatePerson(mPersonGroupId, 
-                                              Application.Context.GetString(Resource.String.user_provided_person_name), 
+            try
+            {
+                var faceClient = new FaceClient();
+                mProgressDialog.SetMessage("Syncing with server to add person...");
+                SetInfo("Syncing with server to add person...");
+                CreatePersonResult person = await faceClient.CreatePerson(mPersonGroupId,
+                                              Application.Context.GetString(Resource.String.user_provided_person_name),
                                               Application.Context.GetString(Resource.String.user_provided_description_data));
 
                 result = person.PersonId.ToString();
-			}
-			catch (Java.Lang.Exception e)
-			{
-				result = null;
-				AddLog(e.Message);
-			}
+            }
+            catch (Java.Lang.Exception e)
+            {
+                result = null;
+                AddLog(e.Message);
+            }
 
-			RunOnUiThread(() =>
-			{
-				mProgressDialog.Dismiss();
+            RunOnUiThread(() =>
+            {
+                mProgressDialog.Dismiss();
 
-				if (result != null)
-				{
-					AddLog("Response: Success. Person " + result + " created.");
-					personId = result;
-					SetInfo("Successfully Synchronized!");
+                if (result != null)
+                {
+                    AddLog("Response: Success. Person " + result + " created.");
+                    personId = result;
+                    SetInfo("Successfully Synchronized!");
 
-					if (mAddFace)
-					{
-						AddFace();
-					}
-					else
-					{
-						DoneAndSave();
-					}
-				}
-			});
-		}
+                    if (mAddFace)
+                    {
+                        AddFace();
+                    }
+                    else
+                    {
+                        DoneAndSave();
+                    }
+                }
+            });
+        }
 
         private void AddFace()
         {
@@ -212,6 +211,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
                         StartActivity(intent);
                     }
                     break;
+
                 default:
                     break;
             }
@@ -245,41 +245,41 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
             faceGridViewAdapter.NotifyDataSetChanged();
         }
 
-		private async void ExecuteDeleteFace(string mPersonGroupId, string mPersonId, string mFaceId)
-		{
-			string result = string.Empty;
+        private async void ExecuteDeleteFace(string mPersonGroupId, string mPersonId, string mFaceId)
+        {
+            string result = string.Empty;
 
-			mProgressDialog.Show();
-			AddLog("Request: Deleting face " + mFaceId);
+            mProgressDialog.Show();
+            AddLog("Request: Deleting face " + mFaceId);
 
-			try
-			{
-				var faceClient = new FaceClient();
-				mProgressDialog.SetMessage("Deleting selected faces...");
-				SetInfo("Deleting selected faces...");
-				UUID _personId = UUID.FromString(mPersonId);
+            try
+            {
+                var faceClient = new FaceClient();
+                mProgressDialog.SetMessage("Deleting selected faces...");
+                SetInfo("Deleting selected faces...");
+                UUID _personId = UUID.FromString(mPersonId);
                 UUID _faceId = UUID.FromString(mFaceId);
                 await faceClient.DeletePersonFace(mPersonGroupId, _personId, _faceId);
 
-				result = mFaceId;
-			}
-			catch (Java.Lang.Exception e)
-			{
-				result = null;
-				AddLog(e.Message);
-			}
+                result = mFaceId;
+            }
+            catch (Java.Lang.Exception e)
+            {
+                result = null;
+                AddLog(e.Message);
+            }
 
-			RunOnUiThread(() =>
-			{
-				mProgressDialog.Dismiss();
+            RunOnUiThread(() =>
+            {
+                mProgressDialog.Dismiss();
 
-				if (result != null)
-				{
-					SetInfo("Face " + result + " successfully deleted");
-					AddLog("Response: Success. Deleting face " + result + " succeed");
-				}
-			});
-		}
+                if (result != null)
+                {
+                    SetInfo("Face " + result + " successfully deleted");
+                    AddLog("Response: Success. Deleting face " + result + " succeed");
+                }
+            });
+        }
 
         private void AddLog(String _log)
         {
@@ -308,6 +308,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
                     case Resource.Id.menu_delete_items:
                         activity.DeleteSelectedItems();
                         return true;
+
                     default:
                         return false;
                 }
@@ -412,7 +413,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
                 if (longPressed)
                 {
                     checkBox.Visibility = ViewStates.Visible;
-					checkBox.SetOnCheckedChangeListener(new SetOnCheckedChangeListener(this, position));
+                    checkBox.SetOnCheckedChangeListener(new SetOnCheckedChangeListener(this, position));
                     checkBox.Checked = faceChecked[position];
                 }
                 else
@@ -440,6 +441,5 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
                 adapter.faceChecked[position] = isChecked;
             }
         }
-
     }
 }

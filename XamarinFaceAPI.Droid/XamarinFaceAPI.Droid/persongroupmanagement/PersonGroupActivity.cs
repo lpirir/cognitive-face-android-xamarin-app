@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +18,11 @@ using Java.Util;
 
 namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.PersonGroupActivity", 
-              Label = "@string/person_group", 
-              ParentActivity = typeof(PersonGroupListActivity), 
-              LaunchMode = Android.Content.PM.LaunchMode.SingleTop, 
-              WindowSoftInputMode = SoftInput.AdjustNothing, 
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.PersonGroupActivity",
+              Label = "@string/person_group",
+              ParentActivity = typeof(PersonGroupListActivity),
+              LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
+              WindowSoftInputMode = SoftInput.AdjustNothing,
               ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class PersonGroupActivity : AppCompatActivity
     {
@@ -234,40 +233,40 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
             }
         }
 
-		private async void ExecuteTrainPersonGroup(string mPersonGroupId)
-		{
-			string result = string.Empty;
+        private async void ExecuteTrainPersonGroup(string mPersonGroupId)
+        {
+            string result = string.Empty;
 
-			mProgressDialog.Show();
-			AddLog("Request: Training group " + mPersonGroupId);
+            mProgressDialog.Show();
+            AddLog("Request: Training group " + mPersonGroupId);
 
-			try
-			{
-				var faceClient = new FaceClient();
-				mProgressDialog.SetMessage("Training person group...");
-				SetInfo("Training person group...");
-				
-				await faceClient.TrainPersonGroup(mPersonGroupId);
+            try
+            {
+                var faceClient = new FaceClient();
+                mProgressDialog.SetMessage("Training person group...");
+                SetInfo("Training person group...");
 
-				result = mPersonGroupId;
-			}
-			catch (Java.Lang.Exception e)
-			{
-				result = null;
-				AddLog(e.Message);
-			}
+                await faceClient.TrainPersonGroup(mPersonGroupId);
 
-			RunOnUiThread(() =>
-			{
-				mProgressDialog.Dismiss();
+                result = mPersonGroupId;
+            }
+            catch (Java.Lang.Exception e)
+            {
+                result = null;
+                AddLog(e.Message);
+            }
 
-				if (result != null)
-				{
-					AddLog("Response: Success. Group " + result + " training completed");
-					Finish();
-				}
-			});
-		}
+            RunOnUiThread(() =>
+            {
+                mProgressDialog.Dismiss();
+
+                if (result != null)
+                {
+                    AddLog("Response: Success. Group " + result + " training completed");
+                    Finish();
+                }
+            });
+        }
 
         private void DeleteSelectedItems()
         {
@@ -296,40 +295,40 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
             personGridViewAdapter.NotifyDataSetChanged();
         }
 
-		private async void ExecuteDeletePerson(string mPersonGroupId, string mPersonId)
-		{
-			string result = string.Empty;
+        private async void ExecuteDeletePerson(string mPersonGroupId, string mPersonId)
+        {
+            string result = string.Empty;
 
-			mProgressDialog.Show();
-			AddLog("Request: Deleting person " + mPersonId);
+            mProgressDialog.Show();
+            AddLog("Request: Deleting person " + mPersonId);
 
-			try
-			{
-				var faceClient = new FaceClient();
-				mProgressDialog.SetMessage("Deleting selected persons...");
-				SetInfo("Deleting selected persons...");
+            try
+            {
+                var faceClient = new FaceClient();
+                mProgressDialog.SetMessage("Deleting selected persons...");
+                SetInfo("Deleting selected persons...");
                 UUID personId = UUID.FromString(mPersonId);
                 await faceClient.DeletePerson(mPersonGroupId, personId);
-				
-				result = mPersonId;
-			}
-			catch (Java.Lang.Exception e)
-			{
-				result = null;
-				AddLog(e.Message);
-			}
 
-			RunOnUiThread(() =>
-			{
-				mProgressDialog.Dismiss();
+                result = mPersonId;
+            }
+            catch (Java.Lang.Exception e)
+            {
+                result = null;
+                AddLog(e.Message);
+            }
 
-				if (result != null)
-				{
-					SetInfo("Person " + result + " successfully deleted");
-					AddLog("Response: Success. Deleting person " + result + " succeed");
-				}
-			});
-		}
+            RunOnUiThread(() =>
+            {
+                mProgressDialog.Dismiss();
+
+                if (result != null)
+                {
+                    SetInfo("Person " + result + " successfully deleted");
+                    AddLog("Response: Success. Deleting person " + result + " succeed");
+                }
+            });
+        }
 
         private void AddLog(String _log)
         {
@@ -358,6 +357,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
                     case Resource.Id.menu_delete_items:
                         activity.DeleteSelectedItems();
                         return true;
+
                     default:
                         return false;
                 }

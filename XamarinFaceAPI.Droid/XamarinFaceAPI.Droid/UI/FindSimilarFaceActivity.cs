@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -333,13 +332,13 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             ExecuteFindFacialSimilarFace(faceIds.ToArray());
         }
 
-		private UUID[] CopyOfRange(UUID[] src, int start, int end)
-		{
-			int len = end - start;
-			UUID[] dest = new UUID[len];
-			Array.Copy(src, start, dest, 0, len);
-			return dest;
-		}
+        private UUID[] CopyOfRange(UUID[] src, int start, int end)
+        {
+            int len = end - start;
+            UUID[] dest = new UUID[len];
+            Array.Copy(src, start, dest, 0, len);
+            return dest;
+        }
 
         private async void ExecuteFindPersonalSimilarFace(UUID[] mFaceIds)
         {
@@ -382,8 +381,8 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
                     SetInfo(resultString);
                 }
 
-            // Show the result on screen when verification is done.
-            SetUiAfterFindPersonalSimilarFaces(faces);
+                // Show the result on screen when verification is done.
+                SetUiAfterFindPersonalSimilarFaces(faces);
             });
         }
 
@@ -430,8 +429,8 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
                             + " matchFace similar face" + ((faces != null && faces.Count() != 1) ? "s" : ""));
                 }
 
-            // Show the result on screen when verification is done.
-            SetUiAfterFindFacialSimilarFaces(faces);
+                // Show the result on screen when verification is done.
+                SetUiAfterFindFacialSimilarFaces(faces);
             });
         }
 
@@ -620,16 +619,16 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
                 }
                 convertView.Id = position;
 
-				// Show the face thumbnail.
-				Bitmap output = null;
-				foreach (KeyValuePair<UUID, Bitmap> val in activity.mFaceListAdapter.faceIdThumbnailMap)
-				{
-					if (val.Key.ToString() == similarFaces[position].ToString())
-					{
-						output = val.Value;
-						break;
-					}
-				}
+                // Show the face thumbnail.
+                Bitmap output = null;
+                foreach (KeyValuePair<UUID, Bitmap> val in activity.mFaceListAdapter.faceIdThumbnailMap)
+                {
+                    if (val.Key.ToString() == similarFaces[position].ToString())
+                    {
+                        output = val.Value;
+                        break;
+                    }
+                }
                 ((ImageView)convertView.FindViewById(Resource.Id.image_face)).SetImageBitmap(output);
 
                 return convertView;

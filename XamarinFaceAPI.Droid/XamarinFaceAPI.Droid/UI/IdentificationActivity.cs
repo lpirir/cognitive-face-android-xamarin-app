@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +13,11 @@ using Android.Widget;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.IdentificationActivity", 
-              Label = "@string/identification", 
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.IdentificationActivity",
+              Label = "@string/identification",
               ParentActivity = typeof(MainActivity),
-			  LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
-			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+              LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
+              ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class IdentificationActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

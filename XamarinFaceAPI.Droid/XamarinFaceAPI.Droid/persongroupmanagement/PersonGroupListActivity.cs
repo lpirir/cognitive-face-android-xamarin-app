@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +17,11 @@ using Java.Util;
 
 namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.PersonGroupListActivity", 
-              Label = "@string/person_group_list", 
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.persongroupmanagement.PersonGroupListActivity",
+              Label = "@string/person_group_list",
               ParentActivity = typeof(IdentificationActivity),
-			  LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
-			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+              LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
+              ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class PersonGroupListActivity : AppCompatActivity
     {
         private PersonGroupsListAdapter personGroupsListAdapter = null;
@@ -171,67 +170,68 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
             });
         }
 
-		private class MultiChoiceModeListener : Java.Lang.Object, AbsListView.IMultiChoiceModeListener
-		{
-			private PersonGroupListActivity activity;
+        private class MultiChoiceModeListener : Java.Lang.Object, AbsListView.IMultiChoiceModeListener
+        {
+            private PersonGroupListActivity activity;
 
-			public MultiChoiceModeListener(PersonGroupListActivity act)
-			{
-				this.activity = act;
-			}
+            public MultiChoiceModeListener(PersonGroupListActivity act)
+            {
+                this.activity = act;
+            }
 
-			public bool OnActionItemClicked(ActionMode mode, IMenuItem item)
-			{
-				switch (item.ItemId)
-				{
-					case Resource.Id.menu_delete_items:
-						activity.DeleteSelectedItems();
-						return true;
-					default:
-						return false;
-				}
-			}
+            public bool OnActionItemClicked(ActionMode mode, IMenuItem item)
+            {
+                switch (item.ItemId)
+                {
+                    case Resource.Id.menu_delete_items:
+                        activity.DeleteSelectedItems();
+                        return true;
 
-			public bool OnCreateActionMode(ActionMode mode, IMenu menu)
-			{
-				MenuInflater inflater = mode.MenuInflater;
-				inflater.Inflate(Resource.Menu.menu_delete_items, menu);
+                    default:
+                        return false;
+                }
+            }
 
-				activity.personGroupsListAdapter.longPressed = true;
-				activity.listView.Adapter = activity.personGroupsListAdapter;
+            public bool OnCreateActionMode(ActionMode mode, IMenu menu)
+            {
+                MenuInflater inflater = mode.MenuInflater;
+                inflater.Inflate(Resource.Menu.menu_delete_items, menu);
 
-				Button addNewItem = (Button)activity.FindViewById(Resource.Id.add_person_group);
-				addNewItem.Enabled = false;
+                activity.personGroupsListAdapter.longPressed = true;
+                activity.listView.Adapter = activity.personGroupsListAdapter;
 
-				return true;
-			}
+                Button addNewItem = (Button)activity.FindViewById(Resource.Id.add_person_group);
+                addNewItem.Enabled = false;
 
-			public void OnDestroyActionMode(ActionMode mode)
-			{
-				activity.personGroupsListAdapter.longPressed = false;
+                return true;
+            }
 
-				for (int i = 0; i < activity.personGroupsListAdapter.personGroupChecked.Count; ++i)
-				{
+            public void OnDestroyActionMode(ActionMode mode)
+            {
+                activity.personGroupsListAdapter.longPressed = false;
+
+                for (int i = 0; i < activity.personGroupsListAdapter.personGroupChecked.Count; ++i)
+                {
                     activity.personGroupsListAdapter.personGroupChecked[i] = false;
-				}
+                }
 
-				activity.listView.Adapter = activity.personGroupsListAdapter;
+                activity.listView.Adapter = activity.personGroupsListAdapter;
 
-				Button addNewItem = (Button)activity.FindViewById(Resource.Id.add_person_group);
-				addNewItem.Enabled = true;
-			}
+                Button addNewItem = (Button)activity.FindViewById(Resource.Id.add_person_group);
+                addNewItem.Enabled = true;
+            }
 
-			public void OnItemCheckedStateChanged(ActionMode mode, int position, long id, bool @checked)
-			{
+            public void OnItemCheckedStateChanged(ActionMode mode, int position, long id, bool @checked)
+            {
                 activity.personGroupsListAdapter.personGroupChecked[position] = @checked;
-				activity.listView.Adapter = activity.personGroupsListAdapter;
-			}
+                activity.listView.Adapter = activity.personGroupsListAdapter;
+            }
 
-			public bool OnPrepareActionMode(ActionMode mode, IMenu menu)
-			{
-				return false;
-			}
-		}
+            public bool OnPrepareActionMode(ActionMode mode, IMenu menu)
+            {
+                return false;
+            }
+        }
 
         private class PersonGroupsListAdapter : BaseAdapter
         {
@@ -307,8 +307,8 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
                 return convertView;
             }
 
-			private class SetOnCheckedChangeListener : Java.Lang.Object, CompoundButton.IOnCheckedChangeListener
-			{
+            private class SetOnCheckedChangeListener : Java.Lang.Object, CompoundButton.IOnCheckedChangeListener
+            {
                 private PersonGroupsListAdapter adapter;
                 private int position;
 
@@ -318,11 +318,11 @@ namespace com.rcervantes.xamarinfaceapi_droid.persongroupmanagement
                     this.position = pos;
                 }
 
-				public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
-				{
+                public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
+                {
                     adapter.personGroupChecked[position] = isChecked;
-				}
-			}
+                }
+            }
         }
     }
 }

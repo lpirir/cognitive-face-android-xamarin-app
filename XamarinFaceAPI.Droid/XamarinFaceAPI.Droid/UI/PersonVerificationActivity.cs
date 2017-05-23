@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,11 +24,11 @@ using Xamarin.Cognitive.Face.Android.Contract;
 
 namespace com.rcervantes.xamarinfaceapi_droid.ui
 {
-    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.PersonVerificationActivity", 
-              Label = "@string/person_verification", 
+    [Activity(Name = "com.rcervantes.xamarinfaceapi_droid.ui.PersonVerificationActivity",
+              Label = "@string/person_verification",
               ParentActivity = typeof(VerificationMenuActivity),
-			  LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
-			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+              LaunchMode = Android.Content.PM.LaunchMode.SingleTop,
+              ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class PersonVerificationActivity : AppCompatActivity
     {
         private static int REQUEST_SELECT_IMAGE = 0;
@@ -228,7 +227,6 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
             });
         }
 
-
         private void View_Log_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(VerificationLogActivity));
@@ -318,7 +316,6 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
                 // Set the default face ID to the ID of first face, if one or more faces are detected.
                 if (faceListAdapter.faces.Count != 0)
                 {
-
                     mFaceId = faceListAdapter.faces[0].FaceId;
 
                     // Show the thumbnail of the default face.
