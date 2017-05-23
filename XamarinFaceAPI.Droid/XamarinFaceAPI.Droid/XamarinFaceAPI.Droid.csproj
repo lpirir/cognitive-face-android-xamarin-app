@@ -119,6 +119,7 @@
     <Compile Include="persongroupmanagement\AddFaceToPersonActivity.cs" />
     <Compile Include="log\GroupingLogActivity.cs" />
     <Compile Include="helpers\EmbeddedGridView.cs" />
+    <Compile Include="log\FindSimilarFaceLogActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -163,6 +164,7 @@
     <AndroidResource Include="Resources\layout\activity_add_face_to_person.axml" />
     <AndroidResource Include="Resources\layout\item_face_group.axml" />
     <AndroidResource Include="Resources\layout\activity_grouping_log.axml" />
+    <AndroidResource Include="Resources\layout\activity_find_similar_face_log.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\mipmap-hdpi\" />
