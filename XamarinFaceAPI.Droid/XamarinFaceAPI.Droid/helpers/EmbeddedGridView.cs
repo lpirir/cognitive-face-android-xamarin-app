@@ -14,8 +14,6 @@ namespace com.rcervantes.xamarinfaceapi_droid.helpers
         {
         	base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
         	int newHeightMeasureSpec = MeasureSpec.MakeMeasureSpec(Android.Views.View.MeasuredSizeMask, MeasureSpecMode.AtMost);
-
-            //LayoutParameters.Height = this.SelectedView.MeasuredHeight;
         }
 
     }
