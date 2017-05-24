@@ -47,7 +47,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.log
 
             public LogAdapter(FindSimilarFaceLogActivity act)
             {
-                this.log = LogHelper.GetDetectionLog();
+                this.log = LogHelper.GetFindSimilarFaceLog();
                 this.activity = act;
             }
 

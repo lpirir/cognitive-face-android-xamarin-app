@@ -12,7 +12,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using com.rcervantes.xamarinfaceapi_droid.helpers;
-using com.rcervantes.xamarinfaceapi_droid.utils;
 using Java.IO;
 using Java.Util;
 using Xamarin.Cognitive.Face.Android;

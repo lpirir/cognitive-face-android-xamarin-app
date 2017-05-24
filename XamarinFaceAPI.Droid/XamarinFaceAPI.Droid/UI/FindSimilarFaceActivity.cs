@@ -357,12 +357,12 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
                 SetInfo("Finding Similar Faces...");
 
                 UUID[] faceIds = CopyOfRange(mFaceIds, 1, mFaceIds.Count());
-                // Start find similar faces.
-                faces = await faceClient.FindSimilar(
-                        mFaceIds[0],  /* The target face ID */
-                        faceIds,    /*candidate faces */
-                        4 /*max number of candidate returned*/
-                        );
+
+				faces = await faceClient.FindSimilar(
+						mFaceIds[0],  /* The target face ID */
+						faceIds,    /*candidate faces */
+						4 /*max number of candidate returned*/
+						);
             }
             catch (Java.Lang.Exception e)
             {
@@ -403,7 +403,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
                 SetInfo("Finding Similar Faces...");
 
                 UUID[] faceIds = CopyOfRange(mFaceIds, 1, mFaceIds.Count());
-                // Start find similar faces.
+
                 faces = await faceClient.FindSimilar(
                         mFaceIds[0],  /* The target face ID */
                         faceIds,    /*candidate faces */
@@ -623,7 +623,7 @@ namespace com.rcervantes.xamarinfaceapi_droid.ui
                 Bitmap output = null;
                 foreach (KeyValuePair<UUID, Bitmap> val in activity.mFaceListAdapter.faceIdThumbnailMap)
                 {
-                    if (val.Key.ToString() == similarFaces[position].ToString())
+                    if (val.Key.ToString() == similarFaces[position].FaceId.ToString())
                     {
                         output = val.Value;
                         break;
