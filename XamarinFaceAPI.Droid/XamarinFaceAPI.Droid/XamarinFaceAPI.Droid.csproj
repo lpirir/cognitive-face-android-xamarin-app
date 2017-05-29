@@ -122,6 +122,7 @@
     <Compile Include="log\GroupingLogActivity.cs" />
     <Compile Include="helpers\EmbeddedGridView.cs" />
     <Compile Include="log\FindSimilarFaceLogActivity.cs" />
+    <Compile Include="log\IdentificationLogActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -167,6 +168,7 @@
     <AndroidResource Include="Resources\layout\item_face_group.axml" />
     <AndroidResource Include="Resources\layout\activity_grouping_log.axml" />
     <AndroidResource Include="Resources\layout\activity_find_similar_face_log.axml" />
+    <AndroidResource Include="Resources\layout\activity_identification_log.axml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

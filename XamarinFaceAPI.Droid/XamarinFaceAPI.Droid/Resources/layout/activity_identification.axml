@@ -40,7 +40,6 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:text="@string/select_image"
-                    android:onClick="selectImage"
                     style="@style/ButtonStyle" />
             </RelativeLayout>
             <ImageView
@@ -83,7 +82,6 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:text="@string/manage_person_groups"
-                    android:onClick="managePersonGroups"
                     style="@style/ButtonStyle" />
             </RelativeLayout>
             <RelativeLayout
@@ -133,7 +131,6 @@
             android:layout_marginRight="@dimen/view_margin"
             android:layout_marginEnd="@dimen/view_margin"
             android:text="@string/identify"
-            android:onClick="identify"
             style="@style/ButtonStyle" />
         <Button
             android:id="@id/view_log"
@@ -141,7 +138,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/view_log"
-            android:onClick="viewLog"
             style="@style/ButtonStyle" />
     </LinearLayout>
 </RelativeLayout>

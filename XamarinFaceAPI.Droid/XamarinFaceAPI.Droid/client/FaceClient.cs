@@ -152,5 +152,26 @@ namespace com.rcervantes.xamarinfaceapi_droid.client
                 return faceServiceClient.FindSimilar(mFaceId, mFaceIds, mMaxNumOfCandidatesReturned, mMode);
             });
         }
+
+		public Task<TrainingStatus> GetPersonGroupTrainingStatus(string mPersonGroupId)
+		{
+			var faceServiceClient = StartupApp.GetFaceServiceClient();
+
+			return Task.Run(() =>
+			{
+				return faceServiceClient.GetPersonGroupTrainingStatus(mPersonGroupId);
+			});
+		}
+
+		public Task<IdentifyResult[]> Identity(string mPersonGroupId, UUID[] mFaceIds, int maxNumOfCandidatesReturned)
+		{
+			var faceServiceClient = StartupApp.GetFaceServiceClient();
+
+			return Task.Run(() =>
+			{
+                return faceServiceClient.Identity(mPersonGroupId, mFaceIds, maxNumOfCandidatesReturned);
+			});
+		}
+
     }
 }
